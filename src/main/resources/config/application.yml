@@ -10,10 +10,10 @@ spring:
     name: '@project.artifactId@'
     version: '@project.version@'
   datasource:
-    url: jdbc:postgresql://localhost:5434/ritarouge
-    username: admin
-    password: password
-    driver-class-name: org.postgresql.Driver
+    url: jdbc:mysql://localhost:3306/online_shop
+    username: root
+    password: root
+    driver-class-name: com.mysql.cj.jdbc.Driver
   jpa:
     hibernate:
       ddl-auto: update
