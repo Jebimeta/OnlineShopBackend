@@ -1,0 +1,1255 @@
+openapi: 3.0.3
+info:
+  title: Online Shop
+  description: |-
+    Aplicación que se encarga de habilitar endpoints para el consumo REST de la base de datos en la tienda online.
+  termsOfService: http://swagger.io/terms/
+  contact:
+    email: apiteam@swagger.io
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+  version: 1.0.11
+externalDocs:
+  description: Find out more about Swagger
+  url: http://swagger.io
+servers:
+  - url: http://localhost:8080/api/v1
+    description: Local server
+
+tags:
+
+  - name: auth
+    description: Controlador para la parte de autenticacion
+
+  - name: purchase
+    description: Controlador para la parte de la gestión de pedidos
+
+  - name: users
+    description: Controlador para la parte de usuarios
+
+  - name: products
+    description: Controlador para la parte de productos
+
+  - name: cart
+    description: Controlador para la parte del carrito de compra
+
+  - name: about
+    description: Controlador para recibir mensajes por parte de usuarios
+
+
+paths:
+
+  /about/send-email:
+    post:
+      tags:
+        - about
+      summary: Send a email to Admin
+      description: Send a email and receive a sucesfully email String as response.
+      operationId: sendEmail
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EmailRequest'
+        required: true
+      responses:
+        '200':
+          description: The email was sent successfuly
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EmailResponse'
+        '400':
+          description: Invalid input
+        '422':
+          description: Validation exception
+
+  /auth/register:
+    post:
+      tags:
+        - auth
+      summary: Register a user
+      description: Register a user and returns an access token and refresh token.
+      operationId: registerUser
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CustomerRequest'
+        required: true
+      responses:
+        '200':
+          description: Authentication successful
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RegisterResponse'
+        '400':
+          description: Invalid input
+        '422':
+          description: Validation exception
+
+  /auth/login:
+    post:
+      tags:
+        - auth
+      summary: Log in a user
+      description: Authenticates a user and returns an access token and refresh token.
+      operationId: loginUser
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LoginRequest'
+        required: true
+      responses:
+        '200':
+          description: Authentication successful
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AuthenticationResponse'
+        '400':
+          description: Invalid input
+        '401':
+          description: Authentication failed
+
+  /auth/verify/{token}:
+    post:
+      tags:
+        - auth
+      summary: Verificar la cuenta de un usuario usando el token de verificación
+      description: Verifica la cuenta del usuario utilizando el token de verificación proporcionado.
+      operationId: verifyUser
+      parameters:
+        - name: token
+          in: path
+          description: El token de verificación para verificar la cuenta
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Cuenta verificada exitosamente
+          content:
+            application/json:
+              schema:
+                type: string
+                example: "Cuenta verificada exitosamente."
+        '400':
+          description: Token de verificación inválido
+          content:
+            application/json:
+              schema:
+                type: string
+                example: "Token de verificación inválido."
+        '404':
+          description: Token de verificación no encontrado
+          content:
+            application/json:
+              schema:
+                type: string
+                example: "Token de verificación no encontrado."
+
+  /auth/authenticated-user:
+    get:
+      tags:
+        - auth
+      summary: Obtener la información del usuario autenticado
+      description: Recupera la información del usuario autenticado.
+      operationId: getAuthenticatedUser
+      responses:
+        '200':
+          description: Usuario autenticado encontrado
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CustomerResponse'
+        '401':
+          description: No autenticado
+          content:
+            application/json:
+              schema:
+                type: string
+                example: "No se encontró ningún usuario autenticado."
+
+  /auth/password-reset/request:
+    post:
+      tags:
+        - auth
+      summary: Envia el link de resetear la contraseña
+      description: Envia el codigo de resetear la contraseña al email del usuario
+      operationId: passwordReset
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                  format: email
+                  description: The email address of the user.
+                  example: user@example.com
+      responses:
+        '200':
+          description: Password reset link sent successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EmailResponse'
+        '404':
+          description: User not found.
+          content:
+            application/json:
+              schema:
+                type: string
+                example: "No se encontró ningún usuario autenticado."
+
+  /auth/password-reset/confirm:
+    patch:
+      tags:
+        - auth
+      summary: Resetea la contrasela utilizando el token
+      description: Si el token es valido, resetea la contraseña
+      operationId: passwordResetConfirm
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                verification-token:
+                  type: string
+                  description: The password reset token sent to the user's email.
+                  example: dummytoken123
+                newPassword:
+                  type: string
+                  format: password
+                  description: The new password for the user.
+                  example: P@ssw0rd123
+      responses:
+        '200':
+          description: Password reset successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CustomerResponse'
+        '400':
+          description: Invalid or expired token.
+          content:
+            application/json:
+              schema:
+                type: string
+                example: "No se encontró ningún usuario autenticado."
+
+  /shop/products:
+    get:
+      tags:
+        - products
+      summary: Obtener todos los productos
+      description: Devuelve todos los productos
+      operationId: getProducts
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ProductResponse'
+
+  /shop/create-product:
+    post:
+      tags:
+        - products
+      summary: Crear un producto
+      description: Crear un producto
+      operationId: createProduct
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/ProductRequest'
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProductResponse'
+        '400':
+          description: Invalid input
+        '422':
+          description: Validation exception
+        '500':
+          description: Internal Server Error - IOException occurred
+
+  /shop/update-product/{productId}:
+    patch:
+      tags:
+        - products
+      summary: Actualizar un producto
+      description: Actualizar un producto
+      operationId: updateProduct
+      parameters:
+        - name: productId
+          in: path
+          description: Id del producto
+          required: true
+          schema:
+            type: integer
+            format: int64
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/ProductRequest'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ProductRequest'
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProductResponse'
+        '400':
+          description: Invalid input
+        '422':
+          description: Validation exception
+        '500':
+          description: Internal Server Error - IOException occurred
+
+  /shop/product/{productId}:
+    get:
+      tags:
+        - products
+      summary: Encontrar un producto por ID
+      description: Econtrar un producto por su ID correspondiente.
+      operationId: getProductById
+      parameters:
+        - name: productId
+          in: path
+          description: ID del producto
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProductResponse'
+        '400':
+          description: Invalid ID supplied
+        '404':
+          description: Product not found
+
+  /shop/product/delete-product/{productId}:
+    delete:
+      tags:
+        - products
+      summary: Eliminar un producto por ID
+      description: Eliminar un producto por su ID correspondiente.
+      operationId: deleteProductById
+      parameters:
+        - name: productId
+          in: path
+          description: ID del producto
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: successful operation
+        '400':
+          description: Invalid ID supplied
+        '404':
+          description: Product not found
+
+
+  /shop/purchases:
+    get:
+      tags:
+        - purchase
+      summary: Obtener todos los pedidos
+      description: Devuelve todos los pedidos
+      operationId: getAllPurchases
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/PurchaseResponse'
+
+  /shop/new-purchase:
+    post:
+      tags:
+        - purchase
+      summary: Hacer un pedido
+      description: Hacer un pedido en la tienda online
+      operationId: newPurchase
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PurchaseRequest'
+
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PurchaseResponse'
+        '400':
+          description: Invalid input
+        '422':
+          description: Validation exception
+
+  /shop/find-purchase/{purchaseId}:
+    get:
+      tags:
+        - purchase
+      summary: Encontrar un pedido por ID
+      description: Econtrar un pedido por su ID correspondiente.
+      operationId: getPurchaseById
+      parameters:
+        - name: purchaseId
+          in: path
+          description: ID del pedido
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PurchaseResponse'
+        '400':
+          description: Invalid ID supplied
+        '404':
+          description: Purchase not found
+
+  /shop/remove-purchase/{purchaseId}:
+    delete:
+      tags:
+        - purchase
+      summary: Cancelar pedido
+      description: Cancelar un pedido por su ID
+      operationId: deletePurchaseById
+      parameters:
+        - name: purchaseId
+          in: path
+          description: ID del pedido a cancelar
+          required: true
+          schema:
+            type: integer
+            format: int64
+
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            text/plain:
+              schema:
+                type: string
+                example: Purchase canceled successfully
+        '400':
+          description: Invalid ID supplied
+        '404':
+          description: Purchase not found
+
+  /shop/purchase-cancellation/{purchaseId}:
+    patch:
+      tags:
+        - purchase
+      summary: Peticion al administrador de cancelar un pedido por parte del usuario
+      description: Cambia el estado del pedido a cancellation_pending
+      operationId: purchaseCancellationRequest
+      parameters:
+        - name: purchaseId
+          in: path
+          description: ID del pedido a cancelar
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PurchaseResponse'
+        '400':
+          description: Invalid ID supplied
+        '404':
+          description: Purchase not found
+
+  /shop/purchase-cancellation-validation/{purchaseId}:
+    patch:
+      tags:
+        - purchase
+      summary: El administrador cancela el pedido al que se ha hecho peticion
+      description: Cambia el estado del pedido a cancellation
+      operationId: purchaseCancellationValidation
+      parameters:
+        - name: purchaseId
+          in: path
+          description: ID del pedido a cancelar
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PurchaseResponse'
+        '400':
+          description: Invalid ID supplied
+        '404':
+          description: Purchase not found
+
+  /users:
+    get:
+      tags:
+        - users
+      summary: Obtener todos los usuarios
+      description: Devuelve todos los usuarios
+      operationId: getUsers
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/CustomerResponse'
+
+  /users/{username}:
+    get:
+      tags:
+        - users
+      summary: Obtener usuario por nombre
+      description: ''
+      operationId: getUserByName
+      parameters:
+        - name: username
+          in: path
+          description: 'Nombre del usuario a buscar '
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CustomerResponse'
+        '400':
+          description: Invalid username supplied
+        '404':
+          description: User not found
+
+  /users/delete/{username}:
+    patch:
+      tags:
+        - users
+      summary: Desactivar usuario
+      description: Desactivar acceso del usuario
+      operationId: deleteUser
+      parameters:
+        - name: username
+          in: path
+          description: Nombre de usuario
+          required: true
+          schema:
+            type: string
+      responses:
+        '400':
+          description: Invalid username supplied
+        '404':
+          description: User not found
+
+
+  /users/update-user:
+    patch:
+      tags:
+        - users
+      summary: Actualizar usuario
+      description: Actualizar datos del usuario usuario.
+      operationId: updateUser
+      requestBody:
+        description: Datos del usuario
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CustomerRequest'
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CustomerResponse'
+        '400':
+          description: Invalid username supplied
+        '404':
+          description: User not found
+
+  /shop/carts:
+    get:
+      tags:
+        - cart
+      summary: Obtener todos los carritos de compra
+      description: Devuelve una lista de todos los carritos de compra.
+      operationId: getAllCarts
+      responses:
+        '200':
+          description: Operación exitosa, devuelve una lista de carritos
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/CartResponse'
+        '400':
+          description: Solicitud incorrecta
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+
+  /shop/cart/{cartId}:
+    get:
+      tags:
+        - cart
+      summary: Obtener carrito de la compra
+      description: Devuelve el carrito de la compra
+      operationId: getCart
+      parameters:
+        - name: cartId
+          in: path
+          description: 'Id del carrito a buscar '
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CartResponse'
+        '404':
+          description: Carrito no encontrado
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+
+  /shop/create-cart:
+    post:
+      tags:
+        - cart
+      summary: Crear un nuevo carrito de la compra
+      description: Crea un nuevo carrito de la compra y devuelve el carrito creado
+      operationId: createCart
+      requestBody:
+        description: 'Datos para la creación del carrito'
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CartRequest'
+      responses:
+        '200':
+          description: Carrito creado exitosamente
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CartResponse'
+        '400':
+          description: Solicitud incorrecta
+
+  /shop/cart/{cartId}/add-product:
+    post:
+      tags:
+        - cart
+      summary: Añadir producto al carrito de la compra
+      description: Devuelve el carrito de la compra actualizado
+      operationId: addCartProduct
+      parameters:
+        - name: cartId
+          in: path
+          description: 'Id del carrito a buscar'
+          required: true
+          schema:
+            type: integer
+            format: int64
+      requestBody:
+        description: 'RequestBody de los detalles del carrito'
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CartDetailsRequest'
+      responses:
+        '200':
+          description: Operación exitosa
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CartDetailsResponse'
+        '404':
+          description: El carrito no ha podido ser creado
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+
+  /shop/cart/{cartId}/update-cart:
+    put:
+      tags:
+        - cart
+      summary: Actualizar información del carrito de la compra
+      description: Devuelve el carrito de la compra actualizado
+      operationId: updateCart
+      parameters:
+        - name: cartId
+          in: path
+          description: 'Id del carrito a actualizar'
+          required: true
+          schema:
+            type: integer
+            format: int64
+      requestBody:
+        description: 'RequestBody con la información a actualizar del carrito'
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CartRequest'
+      responses:
+        '200':
+          description: Operación exitosa
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CartResponse'
+        '404':
+          description: Carrito no encontrado
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '400':
+          description: Solicitud incorrecta
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+
+  /shop/cart/delete-cart/{cartId}:
+    delete:
+      tags:
+        - cart
+      summary: Eliminar carrito de la compra
+      description: Elimina el carrito de la compra identificado por el `cartId`.
+      operationId: deleteCart
+      parameters:
+        - name: cartId
+          in: path
+          description: 'ID del carrito a eliminar'
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: Carrito eliminado exitosamente
+          content:
+            text/plain:
+              schema:
+                type: string
+                example: "El carrito ha sido eliminado con éxito"
+        '404':
+          description: Carrito no encontrado
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '400':
+          description: Solicitud incorrecta
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+
+
+
+  /shop/cart/{cartId}/remove-product/{cartDetailsId}:
+    delete:
+      tags:
+        - cart
+      summary: Eliminar un producto del carrito de la compra
+      description: Elimina un producto del carrito de la compra
+      operationId: removeCartProduct
+      parameters:
+        - name: cartId
+          in: path
+          description: 'Id del carrito a buscar'
+          required: true
+          schema:
+            type: integer
+            format: int64
+        - name: cartDetailsId
+          in: path
+          description: 'Id de los detalles del carrito'
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: Operación exitosa
+          content:
+            text/plain:
+              schema:
+                type: string
+                example: "El producto ha sido eliminado del carrito con éxito"
+
+  /shop/checkout:
+    post:
+      tags:
+        - payment
+      summary: Procesar el checkout de un carrito de compra
+      description: Procesa el checkout de un carrito de compra, creando una orden y finalizando la compra.
+      operationId: processCheckout
+      requestBody:
+        description: 'Datos necesarios para procesar el checkout'
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CheckoutRequest'
+      responses:
+        '200':
+          description: Operación exitosa, orden creada
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PurchaseResponse'
+        '400':
+          description: Solicitud incorrecta
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '404':
+          description: Carrito no encontrado
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '422':
+          description: Error de validación
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+
+
+
+components:
+  schemas:
+    EmailRequest:
+      type: object
+      properties:
+        senderName:
+          type: string
+        phoneNumber:
+          type: string
+        gender:
+          type: string
+        emailMessage:
+          type: string
+
+    EmailResponse:
+      type: object
+      properties:
+        message:
+          type: string
+
+    CartRequest:
+      type: object
+      properties:
+        cartDetails:
+          type: array
+          items:
+            $ref: '#/components/schemas/CartDetailsRequest'
+      required:
+        - id
+        - date
+        - deliveryAddress
+        - paymentMethod
+
+    CartResponse:
+      type: object
+      properties:
+        userId:
+          type: integer
+          format: int64
+          example: 1
+        date:
+          type: string
+          format: date-time
+          example: "2024-05-26T12:30:00Z"
+        cartDetails:
+          type: array
+          items:
+            $ref: '#/components/schemas/CartDetailsResponse'
+
+    CartDetailsRequest:
+      type: object
+      properties:
+        productId:
+          type: integer
+          format: int64
+          example: 2
+        quantity:
+          type: integer
+          example: 1
+
+    CartDetailsResponse:
+      type: object
+      properties:
+        productId:
+          type: integer
+          format: int64
+          example: 2
+        price:
+          type: number
+          example: 29.99
+        quantity:
+          type: integer
+          example: 1
+
+    CheckoutRequest:
+      type: object
+      properties:
+        cartId:
+          type: integer
+          format: int64
+          example: 1
+        userId:
+          type: integer
+          format: int64
+          example: 1
+        paymentMethod:
+          type: string
+          example: creditCard
+        deliveryAddress:
+          type: string
+          example: "Direccion Ficticia B1 1A, 11111"
+        userNotes:
+          type: string
+          example: "Por favor que llegue el envio entre las 3 a las 5 de la tarde."
+          required:
+            - cartId
+            - userId
+            - paymentMethod
+            - deliveryAddress
+
+    ProductRequest:
+      type: object
+      properties:
+        name:
+          type: string
+          example: name
+        description:
+          type: string
+          example: descripcion del producto
+        size:
+          type: string
+          example: "24 x 24"
+        type:
+          type: string
+          example: cuadro
+        price:
+          type: number
+          example: 20.99
+        image:
+          type: string
+          format: binary
+          example: photo.jpg
+
+    ProductResponse:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          example: 1
+        name:
+          type: string
+          example: name
+        description:
+          type: string
+          example: descripcion del producto
+        size:
+          type: string
+          example: "24 x 24"
+        type:
+          type: string
+          example: cuadro
+        price:
+          type: number
+          format: float
+          example: 20.99
+        image:
+          type: string
+          example: photo.jpg
+
+    PurchaseRequest:
+      type: object
+      properties:
+        shippingAddress:
+          type: string
+
+
+    PurchaseResponse:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          example: 1
+        userId:
+          type: integer
+          format: int64
+          example: 2
+        purchaseDate:
+          type: string
+          format: date-time
+          example: 2024-05-26 timestampt
+        estimatedDeliveryTime:
+          type: string
+          format: date
+          example: "2024-05-29"
+          description: "Fecha y hora estimada de entrega del pedido."
+        totalAmount:
+          type: number
+          example: 29.99
+        shippingAddress:
+          type: string
+        status:
+          type: string
+          description: Purchase Status
+          example: approved
+          enum:
+            - placed
+            - approved
+            - delivered
+            - finished
+            - cancellation_pending
+            - cancelled
+        cartDetails:
+          type: array
+          items:
+            $ref: '#/components/schemas/CartDetailsRequest'
+
+
+
+    PurchaseDetailsResponse:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          example: 1
+        purchaseId:
+          type: integer
+          format: int64
+          example: 1
+        productId:
+          type: integer
+          format: int64
+          example: 2
+        price:
+          type: number
+          example: 29.99
+        quantity:
+          type: integer
+          example: 5
+
+    CustomerRequest:
+      type: object
+      properties:
+        name:
+          type: string
+          example: John
+        password:
+          type: string
+          example: '12345'
+        surname:
+          type: string
+          example: James
+        surname2:
+          type: string
+          example: James
+        address:
+          type: string
+          example: Calle nombre n3 1b
+        city:
+          type: string
+          example: Chiclana de la Frontera
+        province:
+          type: string
+          example: Cadiz
+        region:
+          type: string
+          example: España
+        postalCode:
+          type: string
+          example: "11130"
+        email:
+          type: string
+          example: john@email.com
+        phone:
+          type: string
+          example: '12345'
+        status:
+          type: boolean
+          description: Estado del usuario
+          example: true
+
+    LoginRequest:
+      type: object
+      properties:
+        email:
+          type: string
+          example: john@email.com
+        password:
+          type: string
+          example: '12345'
+
+    CustomerResponse:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          example: 1
+        username:
+          type: string
+          example: theUser
+        password:
+          type: string
+          example: '12345'
+        name:
+          type: string
+          example: John
+        surname:
+          type: string
+          example: James
+        surname2:
+          type: string
+          example: James
+        address:
+          type: string
+          example: Calle nombre n3 1b
+        city:
+          type: string
+          example: Chiclana de la Frontera
+        province:
+          type: string
+          example: Cadiz
+        region:
+          type: string
+          example: España
+        postalCode:
+          type: string
+          example: "11130"
+        email:
+          type: string
+          example: john@email.com
+        phone:
+          type: string
+          example: '12345'
+        status:
+          type: boolean
+          description: Estado del usuario
+          example: true
+        rol:
+          type: string
+          format: enum
+            - USER
+            - ADMIN
+          description: Rol de usuario
+          example: USER
+
+    AuthenticationResponse:
+      type: object
+      properties:
+        accessToken:
+          type: string
+          example: eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQSflwTmsuHo_iij07PpRZsI7UlFz06OZtToOZfpC9q6U
+        refreshToken:
+          type: string
+          example: dGhpcy1yZWZyZXNoLXRva2Vu
+        message:
+          type: string
+          example: Authentication successful
+
+    RegisterResponse:
+      type: object
+      properties:
+        accessToken:
+          type: string
+          example: null
+        refreshToken:
+          type: string
+          example: null
+        message:
+          type: string
+          example: Usuario registrado correctamente. Por favor revisa tu correo electrónico para verificar la cuenta.
+
+    ErrorResponse:
+      type: object
+      properties:
+        code:
+          type: integer
+          format: int32
+          example: 404
+          description: "Código de estado HTTP que indica el tipo de error."
+        message:
+          type: string
+          example: "Cart not found"
+          description: "Mensaje descriptivo del error que proporciona más detalles."
+        details:
+          type: string
+          example: "The cart with the given ID does not exist."
+          description: "Información adicional o detalles sobre el error (opcional)."

@@ -1,0 +1,49 @@
+pipeline {
+    agent any
+    environment {
+        IMAGE_NAME = "microservices/ritarouge"
+        IMAGE_TAG = "0.0.1-SNAPSHOT"
+        DOCKERFILE_PATH = "docker/Dockerfile.local"
+        COMPOSE_FILE = "docker/docker-compose.yml"
+    }
+    stages {
+        stage('Clonar repositorio') {
+            steps {
+                script {
+                    sh 'rm -rf RitaRouge || true' // Elimina la carpeta si existe
+                }
+                withCredentials([string(credentialsId: 'github-token', variable: 'GITHUB_TOKEN')]) {
+                    sh 'git clone https://XorySh:${GITHUB_TOKEN}@github.com/XorySh/RitaRouge.git'
+                }
+            }
+        }
+        stage('Compilar Microservicio') {
+            steps {
+                sh 'mvn clean package -DskipTests'
+            }
+        }
+        stage('Construir imagen con Podman') {
+            steps {
+                sh "podman build --pull --tag ${IMAGE_NAME}:${IMAGE_TAG} -f ${DOCKERFILE_PATH} ."
+            }
+        }
+        stage('Desplegar con Podman Compose') {
+            steps {
+                withCredentials([
+                    string(credentialsId: 'BBDD_USER', variable: 'BBDD_USER'),
+                    string(credentialsId: 'BBDD_PASSWORD', variable: 'BBDD_PASSWORD'),
+                    string(credentialsId: 'SMTP_USERNAME', variable: 'SMTP_USERNAME'),
+                    string(credentialsId: 'SMTP_PASSWORD', variable: 'SMTP_PASSWORD')
+                ]) {
+                    sh """
+                        export BBDD_USER=${BBDD_USER}
+                        export BBDD_PASSWORD=${BBDD_PASSWORD}
+                        export SMTP_USERNAME=${SMTP_USERNAME}
+                        export SMTP_PASSWORD=${SMTP_PASSWORD}
+                        podman-compose -f ${COMPOSE_FILE} up
+                    """
+                }
+            }
+        }
+    }
+}
