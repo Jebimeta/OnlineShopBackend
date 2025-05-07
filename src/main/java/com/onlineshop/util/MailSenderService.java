@@ -1,9 +1,9 @@
 package com.onlineshop.util;
 
-import com.onlineshop.config.properties.RitaRougeProperties;
+import com.onlineshop.config.properties.OnlineShopProperties;
 import com.onlineshop.domain.vo.EmailResponse;
-import com.onlineshop.exception.enums.AppErrorCode;
 import com.onlineshop.exception.BusinessException;
+import com.onlineshop.exception.enums.AppErrorCode;
 import com.onlineshop.repository.entities.Customer;
 import com.onlineshop.service.about.EmailResponseFactory;
 import com.onlineshop.service.customer.CustomerQueryService;
@@ -26,7 +26,7 @@ public class MailSenderService {
 
 	private final JavaMailSender mailSender;
 
-	private final RitaRougeProperties properties;
+	private final OnlineShopProperties properties;
 
 	private final CustomerQueryService customerQueryService;
 

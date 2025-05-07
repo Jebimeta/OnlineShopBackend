@@ -1,6 +1,6 @@
 package com.onlineshop.config;
 
-import com.onlineshop.config.properties.RitaRougeProperties;
+import com.onlineshop.config.properties.OnlineShopProperties;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
@@ -10,7 +10,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 @RequiredArgsConstructor
 public class StaticResourceConfig implements WebMvcConfigurer {
 
-	private final RitaRougeProperties properties;
+	private final OnlineShopProperties properties;
 
 	@Override
 	public void addResourceHandlers(ResourceHandlerRegistry registry) {

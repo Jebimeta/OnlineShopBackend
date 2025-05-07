@@ -1,8 +1,8 @@
 package com.onlineshop.util;
 
-import com.onlineshop.config.properties.RitaRougeProperties;
-import com.onlineshop.exception.enums.AppErrorCode;
+import com.onlineshop.config.properties.OnlineShopProperties;
 import com.onlineshop.exception.BusinessException;
+import com.onlineshop.exception.enums.AppErrorCode;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
@@ -25,11 +25,11 @@ import java.nio.file.StandardCopyOption;
 @AllArgsConstructor
 public class ImageService {
 
-	private RitaRougeProperties ritaRougeProperties;
+	private OnlineShopProperties onlineShopProperties;
 
 	public String saveImageInDirectory(MultipartFile image) throws IOException {
 		log.info("INIT - ImageService -> saveImageInDirectory()");
-		Path uploadDirectoryImage = Paths.get(ritaRougeProperties.getUpload().getDirectory());
+		Path uploadDirectoryImage = Paths.get(onlineShopProperties.getUpload().getDirectory());
 		String imageName = getValidImageName(image);
 		if (!Files.exists(uploadDirectoryImage)) {
 			Files.createDirectories(uploadDirectoryImage);
@@ -59,7 +59,7 @@ public class ImageService {
 	}
 
 	public void deleteImage(String imageName) {
-		Path imagePath = Paths.get(ritaRougeProperties.getUpload().getDirectory(), imageName);
+		Path imagePath = Paths.get(onlineShopProperties.getUpload().getDirectory(), imageName);
 
 		try {
 			Files.delete(imagePath);

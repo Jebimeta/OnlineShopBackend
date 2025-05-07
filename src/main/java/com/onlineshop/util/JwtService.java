@@ -1,6 +1,6 @@
 package com.onlineshop.util;
 
-import com.onlineshop.config.properties.RitaRougeProperties;
+import com.onlineshop.config.properties.OnlineShopProperties;
 import com.onlineshop.repository.entities.Customer;
 import com.onlineshop.repository.jpa.TokenJpaRepository;
 import io.jsonwebtoken.Claims;
@@ -21,7 +21,7 @@ import java.util.function.Function;
 @RequiredArgsConstructor
 public class JwtService {
 
-	private final RitaRougeProperties properties;
+	private final OnlineShopProperties properties;
 
 	private final TokenJpaRepository tokenRepository;
 
