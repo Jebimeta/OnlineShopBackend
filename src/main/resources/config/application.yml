@@ -3,7 +3,7 @@ management:
     port: 8080
 logging:
   level:
-    com.ritarouge: debug
+    com.onlineshop: debug
 
 spring:
   application:
@@ -38,7 +38,7 @@ spring:
     default-encoding: UTF-8
   web:
     resources:
-      static-locations: classpath:/static/, file:C:/Users/Melchor/IdeaProjects/ritarouge/src/main/resources/static/products/images
+      static-locations: classpath:/static/, file:C:/Users/Mi Jozé/Desktop/OnlineShop/OnlineShopBackend/src/main/resources/static/products/images
   servlet:
     multipart:
       max-file-size: 10MB
@@ -48,9 +48,9 @@ ritarouge:
   upload:
     directory: src/main/resources/static/products/images/
     baseUrl: http://localhost:8080/products/images/
-    localDirectory: file:C:/Users/Melchor/IdeaProjects/ritarouge/src/main/resources/static/products/images/
+    localDirectory: file:C:/Users/Mi Jozé/Desktop/OnlineShop/OnlineShopBackend/src/main/resources/static/products/images/
   mail:
-    hostEmail: meldewhat@gmail.com
+    hostEmail: proyectoopositaweb@gmail.com
     host: http://localhost:4200
     username: ${SMTP_USERNAME}
     password: ${SMTP_PASSWORD}
@@ -62,12 +62,12 @@ ritarouge:
 
 springdoc:
   api-docs:
-    title: "Rita Rouge Online Shop"
-    description: "Aplicación que se encarga de habilitar endpoints para el consumo REST de la base de datos en la tienda online 'Rita Rouge'."
+    title: "Online Shop"
+    description: "Aplicación que se encarga de habilitar endpoints para el consumo REST de la base de datos en la tienda online."
     version: "OPENAPI_3_0"
     contact:
-      name: "Melchor Díaz Reyes"
-      email: "xory.sh@gmail.com"
+      name: "José Marchena Roldán"
+      email: "jebilongo@gmail.com"
     path: /v3/api-docs
   swagger-ui:
     enabled: true
