@@ -51,10 +51,10 @@ public class AuthController implements AuthApiDelegate {
 	}
 
 	@Override
-	public ResponseEntity<String> verifyUser(@PathVariable("token") String token) {
+	public ResponseEntity<AuthenticationResponse> verifyUser(@PathVariable("token") String token) {
 		log.info("INIT - AuthController -> verifyUser()");
 		log.info("END - AuthController -> verifyUser()");
-		return authenticationService.verifyUser(token);
+		return ResponseEntity.ok(authenticationService.verifyUser(token));
 	}
 
 	@Override
