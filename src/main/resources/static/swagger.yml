@@ -135,8 +135,7 @@ paths:
           content:
             application/json:
               schema:
-                type: string
-                example: "Cuenta verificada exitosamente."
+                $ref: '#/components/schemas/AuthenticationResponse'
         '400':
           description: Token de verificación inválido
           content:
