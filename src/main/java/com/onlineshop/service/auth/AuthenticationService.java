@@ -75,7 +75,6 @@ public class AuthenticationService {
 			return new RegisterResponse(null, null, "User already exists");
 		}
 		log.info("INIT - AuthenticationService -> register()");
-
 		Customer user = customerRequestFactory.createCustomerRequest(request);
 
 		String verificationToken = tokenService.generateVerificationToken(user);
@@ -101,7 +100,7 @@ public class AuthenticationService {
 				"User registered successfully. Please check your email to verify your account.");
 	}
 
-	public ResponseEntity<String> verifyUser(String token) {
+	public AuthenticationResponse verifyUser(String token) {
 		try {
 			log.info("INIT - AuthenticationService -> verifyUser()");
 			Customer customer = tokenService.verifyCustomerByToken(token);
@@ -110,10 +109,16 @@ public class AuthenticationService {
 			repository.save(customer);
 			log.info("END - AuthenticationService -> verifyUser() - {} has been successfully verified.",
 					customer.getEmail());
-			return new ResponseEntity<>("Account verified successfully.", HttpStatus.OK);
+			String accessToken = jwtService.generateAccessToken(customer);
+			String refreshToken = jwtService.generateRefreshToken(customer);
+
+			customerTokenService.revokeAllTokenByUser(customer);
+			customerTokenService.saveUserToken(accessToken, refreshToken, customer);
+			log.debug("Access Token: {} , Refresh Token: {}", accessToken, refreshToken);
+			return new AuthenticationResponse(accessToken, refreshToken, "User login was successful");
 		}
-		catch (RuntimeException e) {
-			return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
+		catch (BusinessException e) {
+			throw new BusinessException(AppErrorCode.ERROR_NOT_VERIFIED_ACCOUNT);
 		}
 	}
 
