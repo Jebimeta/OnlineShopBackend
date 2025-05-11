@@ -36,7 +36,7 @@ public class MailSenderService {
 
 	public void sendVerificationEmail(Customer user) throws BusinessException {
 		String subject = "Verificación de Registro";
-		String senderName = "Rita Rouge";
+		String senderName = "Puntillismo Shop";
 		String verifyURL = properties.getMail().getHost() + "/auth/verify/" + user.getVerificationToken();
 
 		String content = "Estimado " + user.getName() + ",<br>"
@@ -75,7 +75,7 @@ public class MailSenderService {
 
 	public EmailResponse sendPasswordRecoveryEmail(String email) {
 		String subject = "Restablecer contraseña";
-		String senderName = "Rita Rouge";
+		String senderName = "Puntillismo Shop";
 
 		Customer customer = customerQueryService.getCustomerByUserName(email);
 
