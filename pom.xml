@@ -8,11 +8,11 @@
 		<version>3.2.6</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>com.ritarouge</groupId>
+	<groupId>com.onlineshop</groupId>
 	<artifactId>onlineshop</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>ritarouge</name>
-	<description>Rita Rouge Tienda Online</description>
+	<name>onlineshop</name>
+	<description>Tienda Online</description>
 	<properties>
 		<java.version>17</java.version>
 		<!-- Dependency versions -->
