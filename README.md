@@ -1,6 +1,6 @@
-# Rita Rouge Online Shop
+# Online Shop
 
-Back End - Rita Rouge Online Shop.
+Back End - Online Shop.
 
 ## Configuración inicial
 
@@ -27,9 +27,5 @@ Por último se utilizaran las siguientes variables de entorno en la run/debug co
 ```yml
   SMTP_USERNAME=email@email.com; SMTP_PASSWORD=passwword
 ```
-
-## Autores
-
-* [Melchor Díaz Reyes](https://github.com/XorySh)
 
 
