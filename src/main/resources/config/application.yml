@@ -9,11 +9,14 @@ spring:
   application:
     name: '@project.artifactId@'
     version: '@project.version@'
-#  datasource:
+  datasource:
 #    url: jdbc:mysql://localhost:3306/online_shop
 #    username: root
 #    password: root
-    driver-class-name: com.mysql.cj.jdbc.Driver
+#    driver-class-name: com.mysql.cj.jdbc.Driver
+      url: mysql://root:jdbc:mysql://crossover.proxy.rlwy.net:42810/railway
+      username: root
+      password: afdilNrIKsnqBalHKYVILsyPCqaLLLOj
   jpa:
     hibernate:
       ddl-auto: update
