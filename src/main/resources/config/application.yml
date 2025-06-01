@@ -9,10 +9,10 @@ spring:
   application:
     name: '@project.artifactId@'
     version: '@project.version@'
-  datasource:
-    url: jdbc:mysql://localhost:3306/online_shop
-    username: root
-    password: root
+#  datasource:
+#    url: jdbc:mysql://localhost:3306/online_shop
+#    username: root
+#    password: root
     driver-class-name: com.mysql.cj.jdbc.Driver
   jpa:
     hibernate:
@@ -44,7 +44,7 @@ spring:
       max-file-size: 10MB
       max-request-size: 10MB
 
-ritarouge:
+online-shop:
   upload:
     directory: src/main/resources/static/products/images/
     baseUrl: http://localhost:8080/products/images/

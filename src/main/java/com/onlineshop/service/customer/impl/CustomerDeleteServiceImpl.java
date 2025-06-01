@@ -20,9 +20,7 @@ public class CustomerDeleteServiceImpl implements CustomerDeleteService {
 		Optional<Customer> customerEntity = customerJpaRepository.findByUsername(username);
 
 		if (customerEntity.isPresent()) {
-			Customer customer = customerEntity.get();
-			customer.setStatus(false);
-			customerJpaRepository.save(customer);
+			customerJpaRepository.delete(customerEntity.get());
 			return null;
 		}
 		else {
