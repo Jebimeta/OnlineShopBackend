@@ -12,12 +12,20 @@ import org.springframework.core.io.Resource;
 import java.io.File;
 import java.io.IOException;
 
+// Mapper que convierte un ProductRequest a Product
 @Mapper(componentModel = "spring")
 public interface ProductRequestToProductMapper extends Converter<ProductRequest, Product> {
 
 	@Mapping(source = "image", target = "image", qualifiedByName = "mapImage")
 	Product convert(ProductRequest source);
 
+	/**
+	 * Maps de la imagen del producto desde un recurso a una ruta de archivo.
+	 * Este método guarda la imagen en un directorio específico y devuelve la ruta del archivo.
+	 * @param imageResource
+	 * @return
+	 * @throws IOException
+	 */
 	@Named(value = "mapImage")
 	default String mapImage(Resource imageResource) throws IOException {
 		File image = imageResource.getFile();

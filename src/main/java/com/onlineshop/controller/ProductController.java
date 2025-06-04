@@ -17,6 +17,7 @@ import java.io.IOException;
 import java.math.BigDecimal;
 import java.util.List;
 
+// Clase que implementa la interfaz ProductsApiDelegate para manejar las operaciones relacionadas con los productos.
 @Slf4j
 @RestController
 @RequiredArgsConstructor
@@ -36,6 +37,11 @@ public class ProductController implements ProductsApiDelegate {
 
 	private final ProductFactory productFactory;
 
+	/**
+	 * Obtiene todos los productos.
+	 *
+	 * @return Respuesta con la lista de productos.
+	 */
 	@Override
 	public ResponseEntity<List<ProductResponse>> getProducts() {
 		log.info("INIT - ProductController -> getProducts()");
@@ -47,6 +53,17 @@ public class ProductController implements ProductsApiDelegate {
 		return ResponseEntity.ok(productsResponse);
 	}
 
+	/**
+	 * Crea un nuevo producto.
+	 *
+	 * @param name Nombre del producto.
+	 * @param description Descripción del producto.
+	 * @param size Tamaño del producto.
+	 * @param type Tipo de producto.
+	 * @param price Precio del producto.
+	 * @param image Imagen del producto.
+	 * @return Respuesta con los detalles del producto creado.
+	 */
 	@Override
 	public ResponseEntity<ProductResponse> createProduct(String name, String description, String size, String type,
 			BigDecimal price, MultipartFile image) {
@@ -65,6 +82,12 @@ public class ProductController implements ProductsApiDelegate {
 
 	}
 
+	/**
+	 * Obtiene un producto por su ID.
+	 *
+	 * @param productId ID del producto a obtener.
+	 * @return Respuesta con los detalles del producto.
+	 */
 	@Override
 	public ResponseEntity<ProductResponse> getProductById(Long productId) {
 		log.info("INIT - ProductController -> getProductById()");
@@ -74,6 +97,12 @@ public class ProductController implements ProductsApiDelegate {
 		return ResponseEntity.ok(productResponse);
 	}
 
+	/**
+	 * Elimina un producto por su ID.
+	 *
+	 * @param productId ID del producto a eliminar.
+	 * @return Respuesta vacía indicando que la operación fue exitosa.
+	 */
 	@Override
 	public ResponseEntity<Void> deleteProductById(Long productId) {
 		log.info("INIT - ProductController -> deleteProductById()");
@@ -82,6 +111,18 @@ public class ProductController implements ProductsApiDelegate {
 		return ResponseEntity.ok(null);
 	}
 
+	/**
+	 * Actualiza un producto existente.
+	 *
+	 * @param productId ID del producto a actualizar.
+	 * @param name Nombre del producto.
+	 * @param description Descripción del producto.
+	 * @param size Tamaño del producto.
+	 * @param type Tipo de producto.
+	 * @param price Precio del producto.
+	 * @param image Imagen del producto.
+	 * @return Respuesta con los detalles del producto actualizado.
+	 */
 	@Override
 	public ResponseEntity<ProductResponse> updateProduct(Long productId, String name, String description, String size,
 			String type, BigDecimal price, MultipartFile image) {

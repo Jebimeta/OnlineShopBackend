@@ -8,6 +8,7 @@ import org.mapstruct.Mapping;
 import org.mapstruct.Named;
 import org.springframework.core.convert.converter.Converter;
 
+// Mapper que convierte un Product a ProductResponse
 @Mapper(componentModel = "spring")
 public interface ProductToProductResponseMapper extends Converter<Product, ProductResponse> {
 
@@ -16,6 +17,11 @@ public interface ProductToProductResponseMapper extends Converter<Product, Produ
 	@Mapping(source = "image", target = "image", qualifiedByName = "imageNameToImageUrl")
 	ProductResponse convert(@NonNull Product source);
 
+	/**
+	 * Convierte el nombre de la imagen a una URL completa.
+	 * @param imageName Nombre de la imagen.
+	 * @return URL completa de la imagen.
+	 */
 	@Named(value = "imageNameToImageUrl")
 	default String imageNameToImageUrl(String imageName) {
 		return BASE_URL + imageName;

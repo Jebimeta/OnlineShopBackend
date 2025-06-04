@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+// Clase que implementa la interfaz AuthApiDelegate para manejar las operaciones de autenticación.
 @Slf4j
 @RestController
 @RequiredArgsConstructor
@@ -34,6 +35,12 @@ public class AuthController implements AuthApiDelegate {
 
 	private final PasswordRecoveryService passwordRecoveryService;
 
+	/**
+	 * Registra un nuevo usuario.
+	 *
+	 * @param customerRequest Detalles del cliente a registrar.
+	 * @return Respuesta con los detalles del registro.
+	 */
 	@Override
 	public ResponseEntity<RegisterResponse> registerUser(@RequestBody CustomerRequest customerRequest) {
 		log.info("INIT - AuthController -> registerUser()");
@@ -42,6 +49,12 @@ public class AuthController implements AuthApiDelegate {
 		return ResponseEntity.ok(authenticationService.register(customer));
 	}
 
+	/**
+	 * Inicia sesión de un usuario.
+	 *
+	 * @param loginRequest Detalles de inicio de sesión del usuario.
+	 * @return Respuesta con los detalles de autenticación.
+	 */
 	@Override
 	public ResponseEntity<AuthenticationResponse> loginUser(LoginRequest loginRequest) {
 		log.info("INIT - AuthController -> loginUser()");
@@ -50,6 +63,12 @@ public class AuthController implements AuthApiDelegate {
 		return ResponseEntity.ok(authenticationService.authenticate(customer));
 	}
 
+	/**
+	 * Verifica un usuario mediante un token.
+	 *
+	 * @param token Token de verificación del usuario.
+	 * @return Respuesta con los detalles de autenticación.
+	 */
 	@Override
 	public ResponseEntity<AuthenticationResponse> verifyUser(@PathVariable("token") String token) {
 		log.info("INIT - AuthController -> verifyUser()");
@@ -57,6 +76,11 @@ public class AuthController implements AuthApiDelegate {
 		return ResponseEntity.ok(authenticationService.verifyUser(token));
 	}
 
+	/**
+	 * Obtiene el usuario autenticado.
+	 *
+	 * @return Respuesta con los detalles del usuario autenticado.
+	 */
 	@Override
 	public ResponseEntity<CustomerResponse> getAuthenticatedUser() {
 		log.info("INIT - AuthController -> getAuthenticatedUser()");
@@ -66,6 +90,12 @@ public class AuthController implements AuthApiDelegate {
 
 	}
 
+	/**
+	 * Refresca el token de autenticación utilizando el token de refresco.
+	 *
+	 * @param request Solicitud HTTP que contiene el token de refresco.
+	 * @return Respuesta con los detalles del nuevo token de autenticación.
+	 */
 	@Tag(name = "auth")
 	@PostMapping(value = "/api/v1/auth/refresh-token", produces = MediaType.APPLICATION_JSON_VALUE)
 	@Operation(summary = "Refreshes the authentication token using the refresh token.")
@@ -78,6 +108,12 @@ public class AuthController implements AuthApiDelegate {
 		return customerTokenService.refreshToken(request);
 	}
 
+	/**
+	 * Confirma el restablecimiento de la contraseña del usuario.
+	 *
+	 * @param passwordResetConfirmRequest Detalles de la solicitud de confirmación de restablecimiento de contraseña.
+	 * @return Respuesta con los detalles del usuario después de confirmar el restablecimiento de contraseña.
+	 */
 	@Override
 	public ResponseEntity<CustomerResponse> passwordResetConfirm(
 			PasswordResetConfirmRequest passwordResetConfirmRequest) {
@@ -88,6 +124,12 @@ public class AuthController implements AuthApiDelegate {
 		return ResponseEntity.ok(customerResponse);
 	}
 
+	/**
+	 * Envía un correo electrónico para restablecer la contraseña del usuario.
+	 *
+	 * @param passwordResetRequest Detalles de la solicitud de restablecimiento de contraseña.
+	 * @return Respuesta con los detalles del correo electrónico enviado.
+	 */
 	@Override
 	public ResponseEntity<EmailResponse> passwordReset(PasswordResetRequest passwordResetRequest) {
 		log.info("INIT - AuthController -> passwordReset()");

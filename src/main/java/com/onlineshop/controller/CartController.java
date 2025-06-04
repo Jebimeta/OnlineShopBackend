@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
+// Clase que implementa la interfaz CartApiDelegate para manejar las operaciones relacionadas con el carrito de compras.
 @Slf4j
 @RestController
 @RequiredArgsConstructor
@@ -40,6 +41,13 @@ public class CartController implements CartApiDelegate {
 
 	private final RemoveProductFromCartService removeProductFromCartService;
 
+	/**
+	 * Agrega un producto al carrito.
+	 *
+	 * @param cartId ID del carrito al que se le agregará el producto.
+	 * @param cartDetailsRequest Detalles del producto a agregar al carrito.
+	 * @return Respuesta con los detalles del carrito actualizado.
+	 */
 	@Override
 	public ResponseEntity<CartDetailsResponse> addCartProduct(Long cartId, CartDetailsRequest cartDetailsRequest) {
 		log.info("INIT - CartController -> addCartProduct()");
@@ -49,6 +57,12 @@ public class CartController implements CartApiDelegate {
 		return ResponseEntity.ok(cartDetailsResponse);
 	}
 
+	/**
+	 * Crea un nuevo carrito con los detalles del cliente y del carrito.
+	 *
+	 * @param cartRequest Detalles del carrito a crear.
+	 * @return Respuesta con los detalles del carrito creado.
+	 */
 	@Override
 	public ResponseEntity<CartResponse> createCart(CartRequest cartRequest) {
 		log.info("INIT - CartController -> createCart()");
@@ -59,6 +73,12 @@ public class CartController implements CartApiDelegate {
 		return ResponseEntity.ok(cartResponse);
 	}
 
+	/**
+	 * Obtiene un carrito por su ID.
+	 *
+	 * @param cartId ID del carrito a obtener.
+	 * @return Respuesta con los detalles del carrito obtenido.
+	 */
 	@Override
 	public ResponseEntity<CartResponse> getCart(Long cartId) {
 		log.info("INIT - CartController -> getCart()");
@@ -68,6 +88,13 @@ public class CartController implements CartApiDelegate {
 		return ResponseEntity.ok(obtainedCart);
 	}
 
+	/**
+	 * Elimina un producto del carrito.
+	 *
+	 * @param cartId ID del carrito del cual se eliminará el producto.
+	 * @param cartDetailsId ID del detalle del carrito que se eliminará.
+	 * @return Respuesta con un mensaje de éxito o error.
+	 */
 	@Override
 	public ResponseEntity<String> removeCartProduct(Long cartId, Long cartDetailsId) {
 		log.info("INIT - CartController -> removeCartProduct()");
@@ -75,6 +102,13 @@ public class CartController implements CartApiDelegate {
 		return ResponseEntity.ok(removeProductFromCartService.removeProductFromCart(cartId, cartDetailsId));
 	}
 
+	/**
+	 * Actualiza un carrito existente.
+	 *
+	 * @param cartId ID del carrito a actualizar.
+	 * @param cartRequest Detalles del carrito a actualizar.
+	 * @return Respuesta con los detalles del carrito actualizado.
+	 */
 	@Override
 	public ResponseEntity<CartResponse> updateCart(Long cartId, CartRequest cartRequest) {
 		log.info("INIT - CartController -> updateCart()");
@@ -86,6 +120,12 @@ public class CartController implements CartApiDelegate {
 
 	}
 
+	/**
+	 * Elimina un carrito por su ID.
+	 *
+	 * @param cartId ID del carrito a eliminar.
+	 * @return Respuesta con un mensaje de éxito o error.
+	 */
 	@Override
 	public ResponseEntity<String> deleteCart(Long cartId) {
 		log.info("INIT - CartController -> deleteCart()");
@@ -93,6 +133,11 @@ public class CartController implements CartApiDelegate {
 		return ResponseEntity.ok(cartDeleteService.deleteCartById(cartId));
 	}
 
+	/**
+	 * Obtiene todos los carritos existentes.
+	 *
+	 * @return Respuesta con una lista de carritos.
+	 */
 	@Override
 	public ResponseEntity<List<CartResponse>> getAllCarts() {
 		log.info("INIT - CartController -> getAllCarts()");

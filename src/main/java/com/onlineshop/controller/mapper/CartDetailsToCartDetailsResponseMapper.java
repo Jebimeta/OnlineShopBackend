@@ -6,6 +6,7 @@ import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.springframework.core.convert.converter.Converter;
 
+// Mapper que convierte CartDetails a CartDetailsResponse
 @Mapper(componentModel = "spring")
 public interface CartDetailsToCartDetailsResponseMapper extends Converter<CartDetails, CartDetailsResponse> {
 

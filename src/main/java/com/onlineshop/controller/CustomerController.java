@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
+// Clase que implementa la interfaz UsersApiDelegate para manejar las operaciones relacionadas con los usuarios.
 @Slf4j
 @RestController
 @RequiredArgsConstructor
@@ -31,6 +32,12 @@ public class CustomerController implements UsersApiDelegate {
 
 	private final ConversionService conversionService;
 
+	/**
+	 * Obtiene un usuario por su nombre de usuario.
+	 *
+	 * @param username Nombre de usuario del cliente.
+	 * @return Respuesta con los detalles del cliente.
+	 */
 	@Override
 	public ResponseEntity<CustomerResponse> getUserByName(String username) {
 		log.info("INIT - CustomerController -> getUserByName()");
@@ -40,6 +47,12 @@ public class CustomerController implements UsersApiDelegate {
 		return ResponseEntity.ok(customerResponse);
 	}
 
+	/**
+	 * Actualiza un usuario.
+	 *
+	 * @param user Detalles del cliente a actualizar.
+	 * @return Respuesta con los detalles del cliente actualizado.
+	 */
 	@Override
 	public ResponseEntity<CustomerResponse> updateUser(CustomerRequest user) {
 		log.info("INIT - CustomerController -> updateUser()");
@@ -50,6 +63,12 @@ public class CustomerController implements UsersApiDelegate {
 		return ResponseEntity.ok(customerResponse);
 	}
 
+	/**
+	 * Elimina un usuario por su nombre de usuario.
+	 *
+	 * @param username Nombre de usuario del cliente a eliminar.
+	 * @return Respuesta vacía indicando que la operación fue exitosa.
+	 */
 	@Override
 	public ResponseEntity<Void> deleteUser(String username) {
 		log.info("INIT - CustomerController -> deleteUser()");
@@ -58,6 +77,11 @@ public class CustomerController implements UsersApiDelegate {
 		return ResponseEntity.ok(null);
 	}
 
+	/**
+	 * Obtiene todos los usuarios.
+	 *
+	 * @return Respuesta con la lista de todos los clientes.
+	 */
 	@Override
 	public ResponseEntity<List<CustomerResponse>> getUsers() {
 		log.info("INIT - CustomerController -> getUsers()");
