@@ -22,6 +22,7 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 
 import static com.onlineshop.config.enums.OnlineShopApiEndpoints.*;
 
+// Clase de configuración de seguridad para la aplicación OnlineShop.
 @Configuration
 @EnableWebSecurity
 @RequiredArgsConstructor
@@ -33,6 +34,7 @@ public class SecurityConfig {
 
 	private final CustomLogoutHandler logoutHandler;
 
+	// Método que configura la cadena de filtros de seguridad.
 	@Bean
 	public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
 		configureCsrf(http);
@@ -45,10 +47,12 @@ public class SecurityConfig {
 		return http.build();
 	}
 
+	// Métodos de configuración de seguridad.
 	private void configureCsrf(HttpSecurity http) throws Exception {
 		http.csrf(AbstractHttpConfigurer::disable);
 	}
 
+	// Configura la autorización de las solicitudes HTTP.
 	private void configureAuthorization(HttpSecurity http) throws Exception {
 		http.authorizeHttpRequests(registry -> registry
 			.requestMatchers(SWAGGER_UI_HTML.getUrl(), SWAGGER_UI.getUrl(), API_DOCS.getUrl())
@@ -68,18 +72,22 @@ public class SecurityConfig {
 			.authenticated());
 	}
 
+	// Configura el servicio de detalles del usuario para la autenticación.
 	private void configureUserDetailsService(HttpSecurity http) throws Exception {
 		http.userDetailsService(userDetailsServiceImp);
 	}
 
+	// Configura la gestión de sesiones para que sea sin estado (stateless).
 	private void configureSessionManagement(HttpSecurity http) throws Exception {
 		http.sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
 	}
 
+	// Configura el filtro de autenticación JWT.
 	private void configureFilters(HttpSecurity http) {
 		http.addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
 	}
 
+	// Configura el manejo de excepciones para respuestas HTTP adecuadas.
 	private void configureExceptionHandling(HttpSecurity http) throws Exception {
 		http.exceptionHandling(exception -> exception
 			.accessDeniedHandler(
@@ -87,22 +95,26 @@ public class SecurityConfig {
 			.authenticationEntryPoint(new HttpStatusEntryPoint(HttpStatus.UNAUTHORIZED)));
 	}
 
+// Configura el cierre de sesión personalizado.
 	private void configureLogout(HttpSecurity http) throws Exception {
 		http.logout(logout -> logout.logoutUrl("/logout")
 			.addLogoutHandler(logoutHandler)
 			.logoutSuccessHandler((request, response, authentication) -> SecurityContextHolder.clearContext()));
 	}
 
+	// Bean para el codificador de contraseñas, utilizando BCrypt.
 	@Bean
 	public PasswordEncoder passwordEncoder() {
 		return new BCryptPasswordEncoder();
 	}
 
+	// Bean para el administrador de autenticación, que permite la autenticación de usuarios.
 	@Bean
 	public AuthenticationManager authenticationManager(AuthenticationConfiguration configuration) throws Exception {
 		return configuration.getAuthenticationManager();
 	}
 
+	// Bean para los roles de autoridad, configurando el prefijo de los roles a vacío.
 	@Bean
 	public GrantedAuthorityDefaults grantedAuthorityDefaults() {
 		return new GrantedAuthorityDefaults("");

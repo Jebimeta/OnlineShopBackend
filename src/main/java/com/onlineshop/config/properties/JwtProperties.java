@@ -4,6 +4,7 @@ import lombok.Getter;
 import lombok.Setter;
 import org.springframework.stereotype.Component;
 
+// Clase para almacenar las propiedades de JWT
 @Getter
 @Setter
 @Component

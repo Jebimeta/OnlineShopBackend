@@ -2,6 +2,7 @@ package com.onlineshop.config.enums;
 
 import lombok.Getter;
 
+// Endpoints para la API del Online Shop
 @Getter
 public enum OnlineShopApiEndpoints {
 

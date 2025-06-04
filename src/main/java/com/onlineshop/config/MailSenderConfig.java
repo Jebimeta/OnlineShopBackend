@@ -9,12 +9,14 @@ import org.springframework.mail.javamail.JavaMailSenderImpl;
 
 import java.util.Properties;
 
+// Clase de configuración para el envío de correos electrónicos utilizando JavaMailSender.
 @Configuration
 @RequiredArgsConstructor
 public class MailSenderConfig {
 
 	private final OnlineShopProperties properties;
 
+	// Método que crea y configura un bean de JavaMailSender para enviar correos electrónicos.
 	@Bean
 	public JavaMailSender getJavaMailSender() {
 		JavaMailSenderImpl mailSender = new JavaMailSenderImpl();
