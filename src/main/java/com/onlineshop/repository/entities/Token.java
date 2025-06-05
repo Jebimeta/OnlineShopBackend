@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
+// Clase Token que representa un token de acceso y actualización en la base de datos
 @Getter
 @Setter
 @Entity

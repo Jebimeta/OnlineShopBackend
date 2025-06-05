@@ -7,6 +7,7 @@ import lombok.RequiredArgsConstructor;
 import java.time.LocalDateTime;
 import java.util.List;
 
+// Clase Cart que representa un carrito de compras en la base de datos
 @Entity
 @Data
 @RequiredArgsConstructor

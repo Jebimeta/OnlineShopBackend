@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.*;
 import java.util.List;
 
+// Clase Product que representa un producto en la base de datos
 @Entity
 @Getter
 @Setter

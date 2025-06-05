@@ -7,6 +7,7 @@ import lombok.*;
 import java.time.LocalDateTime;
 import java.util.List;
 
+// Clase Purchase que representa una compra en la base de datos
 @Data
 @Builder
 @Getter

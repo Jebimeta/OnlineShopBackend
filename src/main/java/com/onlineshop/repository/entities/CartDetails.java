@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
 
+// Clase CartDetails que representa los detalles de un carrito de compras en la base de datos
 @Entity
 @Data
 @RequiredArgsConstructor

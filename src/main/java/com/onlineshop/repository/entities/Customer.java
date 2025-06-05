@@ -14,11 +14,13 @@ import org.springframework.security.core.userdetails.UserDetails;
 import java.util.Collection;
 import java.util.List;
 
+// Clase Customer que representa un cliente en la base de datos
 @Getter
 @Setter
 @Entity
 @RequiredArgsConstructor
 @Table(name = "customer")
+// UserDetails permite que la clase Customer implemente las funcionalidades de Spring Security para la autenticación y autorización
 public class Customer implements UserDetails {
 
 	@Id
@@ -70,11 +72,13 @@ public class Customer implements UserDetails {
 	@Enumerated(EnumType.STRING)
 	private RolEnum rol;
 
+	// Constructor para crear un Customer con los campos obligatorios
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
 		return List.of(new SimpleGrantedAuthority(rol.name()));
 	}
 
+	// Validaciones para los campos de la clase Customer
 	@Override
 	public boolean isAccountNonExpired() {
 		return true;
