@@ -19,6 +19,7 @@ import org.springframework.stereotype.Service;
 
 import java.io.UnsupportedEncodingException;
 
+// Service para enviar correos electrónicos relacionados con la tienda en línea
 @Service
 @RequiredArgsConstructor
 @Log4j2
@@ -34,6 +35,12 @@ public class MailSenderService {
 
 	private final CustomerUpdateService customerUpdateService;
 
+	/**
+	 * Envía un correo electrónico de verificación al usuario después de su registro.
+	 *
+	 * @param user El usuario al que se le enviará el correo de verificación.
+	 * @throws BusinessException Si ocurre un error al enviar el correo electrónico.
+	 */
 	public void sendVerificationEmail(Customer user) throws BusinessException {
 		String subject = "Verificación de Registro";
 		String senderName = "Puntillismo Shop";
@@ -53,6 +60,16 @@ public class MailSenderService {
 
 	}
 
+	/**
+	 * Envía un correo electrónico al administrador cuando un usuario envía un mensaje a través del formulario de contacto.
+	 *
+	 * @param senderName    El nombre del remitente.
+	 * @param phoneNumber   El número de teléfono del remitente.
+ 	 * @param gender        El género del remitente.
+ 	 * @param emailMessage  El mensaje enviado por el remitente.
+	 * @return Un objeto EmailResponse que indica el resultado del envío del correo.
+	 * @throws BusinessException Si ocurre un error al enviar el correo electrónico.
+	 */
 	public EmailResponse receiveContactUs(String senderName, String phoneNumber, String gender, String emailMessage)
 			throws BusinessException {
 
@@ -73,6 +90,13 @@ public class MailSenderService {
 		}
 	}
 
+	/**
+	 * Envía un correo electrónico de recuperación de contraseña al usuario.
+	 *
+	 * @param email El correo electrónico del usuario que solicita la recuperación de contraseña.
+	 * @return Un objeto EmailResponse que indica el resultado del envío del correo.
+	 * @throws BusinessException Si ocurre un error al enviar el correo electrónico.
+	 */
 	public EmailResponse sendPasswordRecoveryEmail(String email) {
 		String subject = "Restablecer contraseña";
 		String senderName = "Puntillismo Shop";
@@ -101,6 +125,16 @@ public class MailSenderService {
 		return new EmailResponse("Se ha creado el correo correctamente.");
 	}
 
+	/**
+	 * Envía un correo electrónico con el contenido proporcionado al destinatario especificado.
+	 *
+	 * @param email       El correo electrónico del destinatario.
+	 * @param senderName  El nombre del remitente que aparecerá en el correo.
+	 * @param subject     El asunto del correo electrónico.
+	 * @param content     El contenido del correo electrónico, que puede incluir HTML.
+	 * @throws MessagingException Si ocurre un error al crear o enviar el mensaje.
+	 * @throws UnsupportedEncodingException Si ocurre un error al codificar el nombre del remitente.
+	 */
 	private void sendMessage(String email, String senderName, String subject, String content)
 			throws MessagingException, UnsupportedEncodingException {
 		MimeMessage message = mailSender.createMimeMessage();

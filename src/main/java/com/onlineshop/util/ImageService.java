@@ -18,6 +18,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 
+// Service para manejar las imágenes de productos
 @Slf4j
 @Component
 @Getter
@@ -27,6 +28,13 @@ public class ImageService {
 
 	private OnlineShopProperties onlineShopProperties;
 
+	/**
+	 * Guarda una imagen en el directorio especificado en las propiedades de la aplicación.
+	 *
+	 * @param image La imagen a guardar.
+	 * @return El nombre de la imagen guardada.
+	 * @throws IOException Si ocurre un error al guardar la imagen.
+	 */
 	public String saveImageInDirectory(MultipartFile image) throws IOException {
 		log.info("INIT - ImageService -> saveImageInDirectory()");
 		Path uploadDirectoryImage = Paths.get(onlineShopProperties.getUpload().getDirectory());
@@ -39,6 +47,12 @@ public class ImageService {
 		return imageName;
 	}
 
+	/**
+	 * Guarda una imagen en el directorio especificado en las propiedades de la aplicación.
+	 *
+	 * @param image La imagen a guardar.
+	 * @return El nombre de la imagen guardada.
+	 */
 	private String getValidImageName(MultipartFile image) {
 		String imageName = image.getOriginalFilename();
 		if (StringUtils.isEmpty(image.getOriginalFilename())) {
@@ -47,6 +61,12 @@ public class ImageService {
 		return imageName;
 	}
 
+	/**
+	 * Guarda una imagen en el directorio especificado.
+	 *
+	 * @param image      La imagen a guardar.
+	 * @param destination La ruta de destino donde se guardará la imagen.
+	 */
 	private void saveImage(MultipartFile image, Path destination) {
 		try (InputStream inputStream = image.getInputStream()) {
 			log.info("INIT - ImageService -> saveImage() - Saving image");
@@ -58,6 +78,11 @@ public class ImageService {
 		}
 	}
 
+	/**
+	 * Elimina una imagen del directorio especificado en las propiedades de la aplicación.
+	 *
+	 * @param imageName El nombre de la imagen a eliminar.
+	 */
 	public void deleteImage(String imageName) {
 		Path imagePath = Paths.get(onlineShopProperties.getUpload().getDirectory(), imageName);
 
