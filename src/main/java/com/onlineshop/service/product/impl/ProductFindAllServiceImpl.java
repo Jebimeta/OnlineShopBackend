@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+// Service que permite la búsqueda de una lista de productos
 @Slf4j
 @Service
 @RequiredArgsConstructor
@@ -16,6 +17,11 @@ public class ProductFindAllServiceImpl implements ProductsFindAllService {
 
 	private final ProductJpaRepository productJpaRepository;
 
+	/**
+	 * Busca todos los productos en la base de datos.
+	 *
+	 * @return Una lista de productos.
+	 */
 	@Override
 	public List<Product> findAllProducts() {
 		log.info("INIT - ProductFindAllServiceImpl -> findAllProducts()");

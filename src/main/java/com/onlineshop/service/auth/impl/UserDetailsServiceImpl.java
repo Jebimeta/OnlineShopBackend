@@ -15,12 +15,20 @@ import lombok.RequiredArgsConstructor;
 import java.util.Collections;
 import java.util.List;
 
+// Esta clase implementa UserDetailsService para cargar los detalles del usuario durante la autenticación
 @RequiredArgsConstructor
 @Service
 public class UserDetailsServiceImpl implements UserDetailsService {
 
 	private final CustomerJpaRepository repository;
 
+	/**
+	 * Carga los detalles del usuario por su nombre de usuario.
+	 *
+	 * @param username El nombre de usuario del cliente.
+	 * @return Un objeto UserDetails que contiene la información del usuario.
+	 * @throws UsernameNotFoundException Si el usuario no se encuentra en la base de datos.
+	 */
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 		Customer customer = repository.findByUsername(username)

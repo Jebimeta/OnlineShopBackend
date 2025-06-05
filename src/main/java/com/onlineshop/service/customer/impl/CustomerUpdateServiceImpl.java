@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.Optional;
 
+// Service que permite actualizar un cliente
 @Slf4j
 @Service
 @RequiredArgsConstructor
@@ -21,6 +22,13 @@ public class CustomerUpdateServiceImpl implements CustomerUpdateService {
 
 	private final PasswordEncoder passwordEncoder;
 
+	/**
+	 * Actualiza un cliente con los datos proporcionados.
+	 *
+	 * @param customerUpdateRequest el objeto Customer con los datos a actualizar
+	 * @return el cliente actualizado
+	 * @throws UsernameNotFoundException si no se encuentra un cliente con el email proporcionado
+	 */
 	@Override
 	public Customer updateCustomer(Customer customerUpdateRequest) {
 		Optional<Customer> customer = customerJpaRepository.findByEmail(customerUpdateRequest.getEmail());

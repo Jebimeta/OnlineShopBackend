@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+// Service que permite obtener todos los clientes
 @Slf4j
 @Service
 @RequiredArgsConstructor
@@ -16,6 +17,11 @@ public class CustomerFindAllServiceImpl implements CustomerFindAllService {
 
 	private final CustomerJpaRepository customerJpaRepository;
 
+	/**
+	 * Obtiene todos los clientes.
+	 *
+	 * @return una lista de todos los clientes
+	 */
 	@Override
 	public List<Customer> findAllCustomers() {
 		log.info("INIT - CustomerFindAllServiceImpl -> findAllCustomers()");

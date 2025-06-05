@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.Optional;
 
+// Service que permite la búsqueda de un producto por su ID
 @Slf4j
 @Service
 @RequiredArgsConstructor
@@ -16,6 +17,12 @@ public class ProductQueryServiceImpl implements ProductQueryService {
 
 	private final ProductJpaRepository productJpaRepository;
 
+	/**
+	 * Busca un producto en la base de datos por su ID.
+	 *
+	 * @param id El ID del producto a buscar.
+	 * @return El producto encontrado.
+	 */
 	@Override
 	public Product findProductById(Long id) {
 		log.info("INIT - ProductQueryServiceImpl -> findProductById()");

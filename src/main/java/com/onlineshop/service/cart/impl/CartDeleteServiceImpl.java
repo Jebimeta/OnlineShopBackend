@@ -8,12 +8,20 @@ import com.onlineshop.service.cart.CartDeleteService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+// Service que implementa la lógica para eliminar un carrito
 @Service
 @RequiredArgsConstructor
 public class CartDeleteServiceImpl implements CartDeleteService {
 
 	private final CartJpaRepository cartJpaRepository;
 
+	/**
+	 * Método que elimina un carrito por su ID.
+	 *
+	 * @param id ID del carrito a eliminar.
+	 * @return Mensaje de éxito si el carrito fue eliminado correctamente.
+	 * @throws BusinessException si el carrito no se encuentra.
+	 */
 	@Override
 	public String deleteCartById(Long id) {
 		Cart cart = cartJpaRepository.findById(id)

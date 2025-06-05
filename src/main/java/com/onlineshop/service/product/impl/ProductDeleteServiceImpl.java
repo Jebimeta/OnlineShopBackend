@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.Optional;
 
+// Service que permite la eliminación de un producto
 @Slf4j
 @Service
 @RequiredArgsConstructor
@@ -19,6 +20,12 @@ public class ProductDeleteServiceImpl implements ProductDeleteService {
 
 	private final ImageService imageService;
 
+	/**
+	 * Elimina un producto de la base de datos por su ID.
+	 *
+	 * @param id El ID del producto a eliminar.
+	 * @return Void
+	 */
 	@Override
 	public Void deleteProductById(Long id) {
 		log.info("INIT - ProductDeleteServiceImpl -> deleteProductById()");

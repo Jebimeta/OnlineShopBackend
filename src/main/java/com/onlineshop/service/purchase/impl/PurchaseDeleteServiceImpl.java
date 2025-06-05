@@ -10,12 +10,17 @@ import org.springframework.stereotype.Service;
 
 import java.util.Optional;
 
+// Service que implementa la logica de negocio para eliminar compras
 @Service
 @RequiredArgsConstructor
 public class PurchaseDeleteServiceImpl implements PurchaseDeleteService {
 
 	private final PurchaseJpaRepository purchaseJpaRepository;
 
+	/* Metodo que elimina una compra por su ID
+	 * Busca la compra por su ID, si existe la elimina y devuelve un mensaje de éxito
+	 * Si no existe, lanza una excepción de negocio
+	 */
 	@Override
 	public String deletePurchaseById(Long orderId) {
 		Optional<Purchase> optionalPurchase = purchaseJpaRepository.findById(orderId);

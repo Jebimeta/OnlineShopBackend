@@ -9,6 +9,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
+// Esta clase se encarga de enviar un email de contacto al administrador del sitio web.
 @Service
 @Slf4j
 @RequiredArgsConstructor
@@ -16,6 +17,14 @@ public class AboutService {
 
 	private final MailSenderService mailSenderService;
 
+	/**
+	 * Envia un email de contacto al administrador del sitio web.
+	 *
+	 * @param request Contiene los detalles del email a enviar.
+	 * @return Respuesta del envío del email.
+	 * @param request
+	 * @return
+	 */
 	public EmailResponse sendEmail(EmailRequest request) {
 		try {
 			log.info("Sending contact us email");

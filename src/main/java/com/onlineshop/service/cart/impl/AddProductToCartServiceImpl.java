@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 import java.time.LocalDateTime;
 import java.util.List;
 
+// Service que implementa la lógica para agregar un producto al carrito
 @Slf4j
 @Service
 @RequiredArgsConstructor
@@ -22,6 +23,13 @@ public class AddProductToCartServiceImpl implements AddProductToCartService {
 
 	private final CartFindQueryServiceImpl cartFindQueryServiceImpl;
 
+	/**
+	 * Método que agrega un producto al carrito.
+	 *
+	 * @param cartId   ID del carrito al que se le agregará el producto.
+	 * @param request  Objeto que contiene los detalles del producto a agregar.
+	 * @return CartDetails objeto que representa los detalles del producto agregado al carrito.
+	 */
 	@Override
 	public CartDetails addProductToCart(Long cartId, CartDetailsRequest request) {
 		Cart foundCart = cartFindQueryServiceImpl.findCartById(cartId);
