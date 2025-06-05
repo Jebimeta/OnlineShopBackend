@@ -4,6 +4,7 @@ import com.onlineshop.exception.handler.ErrorCode;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 
+// Enum que trata los códigos de error técnicos de la aplicación.
 @Getter
 @RequiredArgsConstructor
 public enum ArchErrorCode implements ErrorCode {

@@ -3,6 +3,7 @@ package com.onlineshop.exception.enums;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 
+// Enum que trata los códigos de error.
 @Getter
 @RequiredArgsConstructor
 public enum AppErrorCode {
