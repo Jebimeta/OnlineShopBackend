@@ -17,7 +17,6 @@ public class ProductUpdateServiceImpl implements ProductUpdateService {
 
 	/**
 	 * Actualiza un producto en la base de datos por su ID.
-	 *
 	 * @param id El ID del producto a actualizar.
 	 * @param product El producto con los nuevos datos.
 	 * @return El producto actualizado.

@@ -22,7 +22,6 @@ public class ProductDeleteServiceImpl implements ProductDeleteService {
 
 	/**
 	 * Elimina un producto de la base de datos por su ID.
-	 *
 	 * @param id El ID del producto a eliminar.
 	 * @return Void
 	 */

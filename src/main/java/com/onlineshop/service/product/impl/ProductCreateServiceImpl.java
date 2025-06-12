@@ -17,7 +17,6 @@ public class ProductCreateServiceImpl implements ProductCreateService {
 
 	/**
 	 * Crea un nuevo producto en la base de datos.
-	 *
 	 * @param product El producto a crear.
 	 * @return El producto creado.
 	 */

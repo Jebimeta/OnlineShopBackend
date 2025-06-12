@@ -19,7 +19,6 @@ public class ProductFindAllServiceImpl implements ProductsFindAllService {
 
 	/**
 	 * Busca todos los productos en la base de datos.
-	 *
 	 * @return Una lista de productos.
 	 */
 	@Override

@@ -19,7 +19,6 @@ public class ProductQueryServiceImpl implements ProductQueryService {
 
 	/**
 	 * Busca un producto en la base de datos por su ID.
-	 *
 	 * @param id El ID del producto a buscar.
 	 * @return El producto encontrado.
 	 */
