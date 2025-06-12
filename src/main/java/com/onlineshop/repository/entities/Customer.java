@@ -20,7 +20,8 @@ import java.util.List;
 @Entity
 @RequiredArgsConstructor
 @Table(name = "customer")
-// UserDetails permite que la clase Customer implemente las funcionalidades de Spring Security para la autenticación y autorización
+// UserDetails permite que la clase Customer implemente las funcionalidades de Spring
+// Security para la autenticación y autorización
 public class Customer implements UserDetails {
 
 	@Id
@@ -58,13 +59,13 @@ public class Customer implements UserDetails {
 	@OneToMany(mappedBy = "customer")
 	private List<Cart> cart;
 
-	@OneToMany(mappedBy = "customer")
+	@OneToMany(mappedBy = "customer", cascade = CascadeType.REMOVE)
 	@JsonIgnore
 	private List<Purchase> purchases;
 
 	private String verificationToken;
 
-	@OneToMany(mappedBy = "customer")
+	@OneToMany(mappedBy = "customer", cascade = CascadeType.REMOVE)
 	@JsonIgnore
 	private List<Token> tokens;
 
