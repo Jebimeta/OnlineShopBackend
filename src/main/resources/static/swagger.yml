@@ -572,7 +572,7 @@ paths:
           description: User not found
 
   /users/delete/{username}:
-    patch:
+    delete:
       tags:
         - users
       summary: Desactivar usuario
@@ -875,6 +875,36 @@ paths:
                 $ref: '#/components/schemas/ErrorResponse'
         '422':
           description: Error de validación
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+  /shop/cart/products/{customerId}:
+    get:
+      tags:
+        - cart
+      summary: Obtener productos del carrito de un usuario
+      description: Devuelve la lista de productos en el carrito de un usuario por su customerId.
+      operationId: getProductsInCartByCustomerId
+      parameters:
+        - name: customerId
+          in: path
+          description: ID del usuario (customer)
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: Lista de productos en el carrito
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ProductResponse'
+        '404':
+          description: Carrito no encontrado
           content:
             application/json:
               schema:
