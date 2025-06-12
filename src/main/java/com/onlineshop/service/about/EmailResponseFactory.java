@@ -15,7 +15,6 @@ public class EmailResponseFactory {
 
 	/**
 	 * Crea una respuesta de email con el mensaje proporcionado.
-	 *
 	 * @param message El mensaje a incluir en la respuesta del email.
 	 * @return Una instancia de EmailResponse con el mensaje proporcionado.
 	 */

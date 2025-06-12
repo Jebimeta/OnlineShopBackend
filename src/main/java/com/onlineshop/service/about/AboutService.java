@@ -19,7 +19,6 @@ public class AboutService {
 
 	/**
 	 * Envia un email de contacto al administrador del sitio web.
-	 *
 	 * @param request Contiene los detalles del email a enviar.
 	 * @return Respuesta del envío del email.
 	 * @param request
