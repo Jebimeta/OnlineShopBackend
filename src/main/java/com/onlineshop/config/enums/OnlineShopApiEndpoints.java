@@ -26,6 +26,7 @@ public enum OnlineShopApiEndpoints {
 	DELETE_PRODUCT_URL(BASE_SHOP_URL.getUrl() + "/product/delete-product/{productId}"),
 
 	// Cart Endpoints
+	CART_PRODUCTS_BY_CUSTOMER_ID_URL(BASE_SHOP_URL.getUrl() + "/cart/products/{customerId}"),
 	OBTAIN_ALL_CARTS_URL(BASE_SHOP_URL.getUrl() + "/carts"), CREATE_CART_URL(BASE_SHOP_URL.getUrl() + "/create-cart"),
 	DELETE_CART_URL(BASE_SHOP_URL.getUrl() + "/cart/delete-cart/{cartId}"),
 	ADD_PRODUCT_URL(BASE_SHOP_URL.getUrl() + "/cart/{cartId}/add-product"),
