@@ -36,9 +36,8 @@ public class RestResponseEntityExceptionHandler extends ResponseEntityExceptionH
 	private static final String PARAMETRIZED_CONCATENATION = "{}: {}";
 
 	/**
-	 * Maneja las excepciones de tipo BusinessException y devuelve una respuesta HTTP con el código de error
-	 * correspondiente.
-	 *
+	 * Maneja las excepciones de tipo BusinessException y devuelve una respuesta HTTP con
+	 * el código de error correspondiente.
 	 * @param ex la excepción de tipo BusinessException
 	 * @return ResponseEntity con el ErrorResponse correspondiente
 	 */
@@ -52,9 +51,8 @@ public class RestResponseEntityExceptionHandler extends ResponseEntityExceptionH
 	}
 
 	/**
-	 * Maneja las excepciones de tipo IllegalArgumentException y devuelve una respuesta HTTP con el código de error
-	 * correspondiente.
-	 *
+	 * Maneja las excepciones de tipo IllegalArgumentException y devuelve una respuesta
+	 * HTTP con el código de error correspondiente.
 	 * @param ex la excepción de tipo IllegalArgumentException
 	 * @return ResponseEntity con el ErrorResponse correspondiente
 	 */
@@ -74,9 +72,8 @@ public class RestResponseEntityExceptionHandler extends ResponseEntityExceptionH
 	}
 
 	/**
-	 * Maneja las excepciones de tipo ConstraintViolationException y devuelve una respuesta HTTP con el código de error
-	 * correspondiente.
-	 *
+	 * Maneja las excepciones de tipo ConstraintViolationException y devuelve una
+	 * respuesta HTTP con el código de error correspondiente.
 	 * @param ex la excepción de tipo ConstraintViolationException
 	 * @return ResponseEntity con el ErrorResponse correspondiente
 	 */
@@ -94,8 +91,8 @@ public class RestResponseEntityExceptionHandler extends ResponseEntityExceptionH
 	}
 
 	/**
-	 * Maneja las excepciones no capturadas y devuelve una respuesta HTTP con un mensaje de error genérico.
-	 *
+	 * Maneja las excepciones no capturadas y devuelve una respuesta HTTP con un mensaje
+	 * de error genérico.
 	 * @param ex la excepción no capturada
 	 * @return ResponseEntity con el ErrorResponse correspondiente
 	 */
@@ -108,9 +105,8 @@ public class RestResponseEntityExceptionHandler extends ResponseEntityExceptionH
 	}
 
 	/**
-	 * Maneja las excepciones de tipo MissingServletRequestPartException y devuelve una respuesta HTTP con el código de
-	 * error correspondiente.
-	 *
+	 * Maneja las excepciones de tipo MissingServletRequestPartException y devuelve una
+	 * respuesta HTTP con el código de error correspondiente.
 	 * @param ex la excepción de tipo MissingServletRequestPartException
 	 * @return ResponseEntity con el ErrorResponse correspondiente
 	 */
@@ -124,9 +120,8 @@ public class RestResponseEntityExceptionHandler extends ResponseEntityExceptionH
 	}
 
 	/**
-	 * Maneja las excepciones de tipo MissingServletRequestParameterException y devuelve una respuesta HTTP con el
-	 * código de error correspondiente.
-	 *
+	 * Maneja las excepciones de tipo MissingServletRequestParameterException y devuelve
+	 * una respuesta HTTP con el código de error correspondiente.
 	 * @param ex la excepción de tipo MissingServletRequestParameterException
 	 * @return ResponseEntity con el ErrorResponse correspondiente
 	 */
@@ -140,9 +135,8 @@ public class RestResponseEntityExceptionHandler extends ResponseEntityExceptionH
 	}
 
 	/**
-	 * Maneja las excepciones de tipo NoSuchElementException y devuelve una respuesta HTTP con el código de error
-	 * correspondiente.
-	 *
+	 * Maneja las excepciones de tipo NoSuchElementException y devuelve una respuesta HTTP
+	 * con el código de error correspondiente.
 	 * @param ex la excepción de tipo NoSuchElementException
 	 * @return ResponseEntity con el ErrorResponse correspondiente
 	 */
@@ -155,9 +149,8 @@ public class RestResponseEntityExceptionHandler extends ResponseEntityExceptionH
 	}
 
 	/**
-	 * Maneja las excepciones de tipo TypeMismatchException y devuelve una respuesta HTTP con el código de error
-	 * correspondiente.
-	 *
+	 * Maneja las excepciones de tipo TypeMismatchException y devuelve una respuesta HTTP
+	 * con el código de error correspondiente.
 	 * @param ex la excepción de tipo TypeMismatchException
 	 * @return ResponseEntity con el ErrorResponse correspondiente
 	 */
@@ -171,9 +164,8 @@ public class RestResponseEntityExceptionHandler extends ResponseEntityExceptionH
 	}
 
 	/**
-	 * Maneja las excepciones de tipo HttpRequestMethodNotSupportedException y devuelve una respuesta HTTP con el
-	 * código de error correspondiente.
-	 *
+	 * Maneja las excepciones de tipo HttpRequestMethodNotSupportedException y devuelve
+	 * una respuesta HTTP con el código de error correspondiente.
 	 * @param ex la excepción de tipo HttpRequestMethodNotSupportedException
 	 * @return ResponseEntity con el ErrorResponse correspondiente
 	 */
@@ -187,9 +179,8 @@ public class RestResponseEntityExceptionHandler extends ResponseEntityExceptionH
 	}
 
 	/**
-	 * Maneja las excepciones de tipo HttpMediaTypeNotSupportedException y devuelve una respuesta HTTP con el código
-	 * de error correspondiente.
-	 *
+	 * Maneja las excepciones de tipo HttpMediaTypeNotSupportedException y devuelve una
+	 * respuesta HTTP con el código de error correspondiente.
 	 * @param ex la excepción de tipo HttpMediaTypeNotSupportedException
 	 * @return ResponseEntity con el ErrorResponse correspondiente
 	 */
@@ -203,9 +194,8 @@ public class RestResponseEntityExceptionHandler extends ResponseEntityExceptionH
 	}
 
 	/**
-	 * Maneja las excepciones de tipo InternalServerErrorException y devuelve una respuesta HTTP con el código de error
-	 * correspondiente.
-	 *
+	 * Maneja las excepciones de tipo InternalServerErrorException y devuelve una
+	 * respuesta HTTP con el código de error correspondiente.
 	 * @param ex la excepción de tipo InternalServerErrorException
 	 * @return ResponseEntity con el ErrorResponse correspondiente
 	 */
@@ -218,9 +208,8 @@ public class RestResponseEntityExceptionHandler extends ResponseEntityExceptionH
 	}
 
 	/**
-	 * Maneja las excepciones de tipo SocketTimeoutException y devuelve una respuesta HTTP con el código de error
-	 * correspondiente.
-	 *
+	 * Maneja las excepciones de tipo SocketTimeoutException y devuelve una respuesta HTTP
+	 * con el código de error correspondiente.
 	 * @param ex la excepción de tipo SocketTimeoutException
 	 * @return ResponseEntity con el ErrorResponse correspondiente
 	 */

@@ -8,7 +8,7 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public enum AppErrorCode {
 
-	ERROR_UNEXPECTED("An unexpected error occurred."), ERROR_CREATE_CART("No cartDetails exist to create the cart."),
+	ERROR_UNEXPECTED("An unexpected error occurred."), ERROR_CREATE_CART("Failed to create the cart."),
 	ERROR_CART_NOT_FOUND("The cart could not be found."),
 	ERROR_INVALID_CART_REQUEST("The cart update request is invalid."),
 	ERROR_IMAGE_NAME("The file name is null or empty."), ERROR_SAVE_IMAGE("Failed to save the image."),
@@ -21,7 +21,8 @@ public enum AppErrorCode {
 	ERROR_USER_NOT_FOUND("User not found."), ERROR_BUILD_PRODUCT("The product can not be built"),
 	ERROR_PRODUCT_NOT_FOUND("Product not found."), ERROR_INVALID_VERIFICATION_TOKEN("Invalid verification token."),
 	ERROR_UNFORBIDDEN_CART("User not have permission to obtain this cart"),
-	ERROR_UNFORBIDDEN_PURCHASE("User not have permission to obtain this purchase");
+	ERROR_UNFORBIDDEN_PURCHASE("User not have permission to obtain this purchase"),
+	ERROR_TOKEN_NOT_FOUND("Token not found");
 
 	private final String message;
 
