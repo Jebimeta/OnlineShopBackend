@@ -34,7 +34,6 @@ public class CustomerController implements UsersApiDelegate {
 
 	/**
 	 * Obtiene un usuario por su nombre de usuario.
-	 *
 	 * @param username Nombre de usuario del cliente.
 	 * @return Respuesta con los detalles del cliente.
 	 */
@@ -49,7 +48,6 @@ public class CustomerController implements UsersApiDelegate {
 
 	/**
 	 * Actualiza un usuario.
-	 *
 	 * @param user Detalles del cliente a actualizar.
 	 * @return Respuesta con los detalles del cliente actualizado.
 	 */
@@ -65,7 +63,6 @@ public class CustomerController implements UsersApiDelegate {
 
 	/**
 	 * Elimina un usuario por su nombre de usuario.
-	 *
 	 * @param username Nombre de usuario del cliente a eliminar.
 	 * @return Respuesta vacía indicando que la operación fue exitosa.
 	 */
@@ -79,7 +76,6 @@ public class CustomerController implements UsersApiDelegate {
 
 	/**
 	 * Obtiene todos los usuarios.
-	 *
 	 * @return Respuesta con la lista de todos los clientes.
 	 */
 	@Override

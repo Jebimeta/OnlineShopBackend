@@ -37,7 +37,6 @@ public class AuthController implements AuthApiDelegate {
 
 	/**
 	 * Registra un nuevo usuario.
-	 *
 	 * @param customerRequest Detalles del cliente a registrar.
 	 * @return Respuesta con los detalles del registro.
 	 */
@@ -51,7 +50,6 @@ public class AuthController implements AuthApiDelegate {
 
 	/**
 	 * Inicia sesión de un usuario.
-	 *
 	 * @param loginRequest Detalles de inicio de sesión del usuario.
 	 * @return Respuesta con los detalles de autenticación.
 	 */
@@ -65,7 +63,6 @@ public class AuthController implements AuthApiDelegate {
 
 	/**
 	 * Verifica un usuario mediante un token.
-	 *
 	 * @param token Token de verificación del usuario.
 	 * @return Respuesta con los detalles de autenticación.
 	 */
@@ -78,7 +75,6 @@ public class AuthController implements AuthApiDelegate {
 
 	/**
 	 * Obtiene el usuario autenticado.
-	 *
 	 * @return Respuesta con los detalles del usuario autenticado.
 	 */
 	@Override
@@ -92,7 +88,6 @@ public class AuthController implements AuthApiDelegate {
 
 	/**
 	 * Refresca el token de autenticación utilizando el token de refresco.
-	 *
 	 * @param request Solicitud HTTP que contiene el token de refresco.
 	 * @return Respuesta con los detalles del nuevo token de autenticación.
 	 */
@@ -110,9 +105,10 @@ public class AuthController implements AuthApiDelegate {
 
 	/**
 	 * Confirma el restablecimiento de la contraseña del usuario.
-	 *
-	 * @param passwordResetConfirmRequest Detalles de la solicitud de confirmación de restablecimiento de contraseña.
-	 * @return Respuesta con los detalles del usuario después de confirmar el restablecimiento de contraseña.
+	 * @param passwordResetConfirmRequest Detalles de la solicitud de confirmación de
+	 * restablecimiento de contraseña.
+	 * @return Respuesta con los detalles del usuario después de confirmar el
+	 * restablecimiento de contraseña.
 	 */
 	@Override
 	public ResponseEntity<CustomerResponse> passwordResetConfirm(
@@ -126,8 +122,8 @@ public class AuthController implements AuthApiDelegate {
 
 	/**
 	 * Envía un correo electrónico para restablecer la contraseña del usuario.
-	 *
-	 * @param passwordResetRequest Detalles de la solicitud de restablecimiento de contraseña.
+	 * @param passwordResetRequest Detalles de la solicitud de restablecimiento de
+	 * contraseña.
 	 * @return Respuesta con los detalles del correo electrónico enviado.
 	 */
 	@Override

@@ -20,8 +20,8 @@ public interface ProductRequestToProductMapper extends Converter<ProductRequest,
 	Product convert(ProductRequest source);
 
 	/**
-	 * Maps de la imagen del producto desde un recurso a una ruta de archivo.
-	 * Este método guarda la imagen en un directorio específico y devuelve la ruta del archivo.
+	 * Maps de la imagen del producto desde un recurso a una ruta de archivo. Este método
+	 * guarda la imagen en un directorio específico y devuelve la ruta del archivo.
 	 * @param imageResource
 	 * @return
 	 * @throws IOException

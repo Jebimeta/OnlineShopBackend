@@ -33,7 +33,6 @@ public class PurchaseController implements PurchaseApiDelegate {
 
 	/**
 	 * Elimina una compra por su ID.
-	 *
 	 * @param purchaseId ID de la compra a eliminar.
 	 * @return Respuesta con un mensaje de confirmación de eliminación.
 	 */
@@ -47,7 +46,6 @@ public class PurchaseController implements PurchaseApiDelegate {
 
 	/**
 	 * Obtiene todas las compras.
-	 *
 	 * @return Respuesta con la lista de compras.
 	 */
 	@Override
@@ -63,7 +61,6 @@ public class PurchaseController implements PurchaseApiDelegate {
 
 	/**
 	 * Obtiene una compra por su ID.
-	 *
 	 * @param purchaseId ID de la compra a obtener.
 	 * @return Respuesta con los detalles de la compra.
 	 */
@@ -78,7 +75,6 @@ public class PurchaseController implements PurchaseApiDelegate {
 
 	/**
 	 * Crea una nueva compra.
-	 *
 	 * @param purchaseRequest Detalles de la compra a crear.
 	 * @return Respuesta con los detalles de la compra creada.
 	 */
@@ -93,7 +89,6 @@ public class PurchaseController implements PurchaseApiDelegate {
 
 	/**
 	 * Solicita la cancelación de una compra.
-	 *
 	 * @param purchaseId ID de la compra a cancelar.
 	 * @return Respuesta con los detalles de la compra cancelada.
 	 */
@@ -108,7 +103,6 @@ public class PurchaseController implements PurchaseApiDelegate {
 
 	/**
 	 * Valida la cancelación de una compra.
-	 *
 	 * @param purchaseId ID de la compra a validar para cancelación.
 	 * @return Respuesta con los detalles de la compra validada para cancelación.
 	 */

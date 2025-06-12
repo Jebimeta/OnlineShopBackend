@@ -39,7 +39,6 @@ public class ProductController implements ProductsApiDelegate {
 
 	/**
 	 * Obtiene todos los productos.
-	 *
 	 * @return Respuesta con la lista de productos.
 	 */
 	@Override
@@ -55,7 +54,6 @@ public class ProductController implements ProductsApiDelegate {
 
 	/**
 	 * Crea un nuevo producto.
-	 *
 	 * @param name Nombre del producto.
 	 * @param description Descripción del producto.
 	 * @param size Tamaño del producto.
@@ -84,7 +82,6 @@ public class ProductController implements ProductsApiDelegate {
 
 	/**
 	 * Obtiene un producto por su ID.
-	 *
 	 * @param productId ID del producto a obtener.
 	 * @return Respuesta con los detalles del producto.
 	 */
@@ -99,7 +96,6 @@ public class ProductController implements ProductsApiDelegate {
 
 	/**
 	 * Elimina un producto por su ID.
-	 *
 	 * @param productId ID del producto a eliminar.
 	 * @return Respuesta vacía indicando que la operación fue exitosa.
 	 */
@@ -113,7 +109,6 @@ public class ProductController implements ProductsApiDelegate {
 
 	/**
 	 * Actualiza un producto existente.
-	 *
 	 * @param productId ID del producto a actualizar.
 	 * @param name Nombre del producto.
 	 * @param description Descripción del producto.

@@ -5,14 +5,18 @@ import com.onlineshop.domain.vo.CartDetailsRequest;
 import com.onlineshop.domain.vo.CartDetailsResponse;
 import com.onlineshop.domain.vo.CartRequest;
 import com.onlineshop.domain.vo.CartResponse;
+import com.onlineshop.domain.vo.ProductResponse;
 import com.onlineshop.repository.entities.Cart;
 import com.onlineshop.repository.entities.CartDetails;
+import com.onlineshop.repository.entities.Product;
 import com.onlineshop.service.cart.*;
 import com.onlineshop.service.cart.factory.CartFactory;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.core.convert.ConversionService;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
@@ -43,7 +47,6 @@ public class CartController implements CartApiDelegate {
 
 	/**
 	 * Agrega un producto al carrito.
-	 *
 	 * @param cartId ID del carrito al que se le agregará el producto.
 	 * @param cartDetailsRequest Detalles del producto a agregar al carrito.
 	 * @return Respuesta con los detalles del carrito actualizado.
@@ -59,7 +62,6 @@ public class CartController implements CartApiDelegate {
 
 	/**
 	 * Crea un nuevo carrito con los detalles del cliente y del carrito.
-	 *
 	 * @param cartRequest Detalles del carrito a crear.
 	 * @return Respuesta con los detalles del carrito creado.
 	 */
@@ -75,7 +77,6 @@ public class CartController implements CartApiDelegate {
 
 	/**
 	 * Obtiene un carrito por su ID.
-	 *
 	 * @param cartId ID del carrito a obtener.
 	 * @return Respuesta con los detalles del carrito obtenido.
 	 */
@@ -90,7 +91,6 @@ public class CartController implements CartApiDelegate {
 
 	/**
 	 * Elimina un producto del carrito.
-	 *
 	 * @param cartId ID del carrito del cual se eliminará el producto.
 	 * @param cartDetailsId ID del detalle del carrito que se eliminará.
 	 * @return Respuesta con un mensaje de éxito o error.
@@ -104,7 +104,6 @@ public class CartController implements CartApiDelegate {
 
 	/**
 	 * Actualiza un carrito existente.
-	 *
 	 * @param cartId ID del carrito a actualizar.
 	 * @param cartRequest Detalles del carrito a actualizar.
 	 * @return Respuesta con los detalles del carrito actualizado.
@@ -122,7 +121,6 @@ public class CartController implements CartApiDelegate {
 
 	/**
 	 * Elimina un carrito por su ID.
-	 *
 	 * @param cartId ID del carrito a eliminar.
 	 * @return Respuesta con un mensaje de éxito o error.
 	 */
@@ -135,7 +133,6 @@ public class CartController implements CartApiDelegate {
 
 	/**
 	 * Obtiene todos los carritos existentes.
-	 *
 	 * @return Respuesta con una lista de carritos.
 	 */
 	@Override
@@ -147,6 +144,22 @@ public class CartController implements CartApiDelegate {
 			.toList();
 		log.info("END - CartController -> getAllCarts()");
 		return ResponseEntity.ok(allCartsObtained);
+	}
+
+	/**
+	 * Endpoint para obtener los productos del carrito de un usuario por su customerId.
+	 * @param customerId ID del usuario (customer)
+	 * @return Lista de productos en el carrito
+	 */
+
+	@Override
+	public ResponseEntity<List<ProductResponse>> getProductsInCartByCustomerId(Long customerId) {
+		log.info("GET /shop/cart/products/{}", customerId);
+		List<Product> products = cartQueryService.findProductsInCartByCustomerId(customerId);
+		List<ProductResponse> productResponses = products.stream()
+			.map(product -> conversionService.convert(product, ProductResponse.class))
+			.toList();
+		return ResponseEntity.ok(productResponses);
 	}
 
 }
