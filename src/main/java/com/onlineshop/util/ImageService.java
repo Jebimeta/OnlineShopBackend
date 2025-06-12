@@ -29,8 +29,8 @@ public class ImageService {
 	private OnlineShopProperties onlineShopProperties;
 
 	/**
-	 * Guarda una imagen en el directorio especificado en las propiedades de la aplicación.
-	 *
+	 * Guarda una imagen en el directorio especificado en las propiedades de la
+	 * aplicación.
 	 * @param image La imagen a guardar.
 	 * @return El nombre de la imagen guardada.
 	 * @throws IOException Si ocurre un error al guardar la imagen.
@@ -48,8 +48,8 @@ public class ImageService {
 	}
 
 	/**
-	 * Guarda una imagen en el directorio especificado en las propiedades de la aplicación.
-	 *
+	 * Guarda una imagen en el directorio especificado en las propiedades de la
+	 * aplicación.
 	 * @param image La imagen a guardar.
 	 * @return El nombre de la imagen guardada.
 	 */
@@ -63,8 +63,7 @@ public class ImageService {
 
 	/**
 	 * Guarda una imagen en el directorio especificado.
-	 *
-	 * @param image      La imagen a guardar.
+	 * @param image La imagen a guardar.
 	 * @param destination La ruta de destino donde se guardará la imagen.
 	 */
 	private void saveImage(MultipartFile image, Path destination) {
@@ -80,7 +79,6 @@ public class ImageService {
 
 	/**
 	 * Elimina una imagen del directorio especificado en las propiedades de la aplicación.
-	 *
 	 * @param imageName El nombre de la imagen a eliminar.
 	 */
 	public void deleteImage(String imageName) {

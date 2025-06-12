@@ -28,7 +28,6 @@ public class JwtService {
 
 	/**
 	 * Extrae el nombre de usuario del token JWT.
-	 *
 	 * @param token El token JWT del cual se extraerá el nombre de usuario.
 	 * @return El nombre de usuario extraído del token.
 	 */
@@ -38,9 +37,8 @@ public class JwtService {
 
 	/**
 	 * Verifica si el token es válido para un usuario específico.
-	 *
 	 * @param token El token JWT a validar.
-	 * @param user  Los detalles del usuario para comparar con el token.
+	 * @param user Los detalles del usuario para comparar con el token.
 	 * @return true si el token es válido, false en caso contrario.
 	 */
 	public boolean isValid(String token, UserDetails user) {
@@ -49,8 +47,7 @@ public class JwtService {
 
 	/**
 	 * Verifica si el token de actualización es válido para un cliente específico.
-	 *
-	 * @param token    El token JWT de actualización a validar.
+	 * @param token El token JWT de actualización a validar.
 	 * @param customer El cliente para comparar con el token.
 	 * @return true si el token de actualización es válido, false en caso contrario.
 	 */
@@ -61,8 +58,7 @@ public class JwtService {
 
 	/**
 	 * Verifica si el token es válido para un cliente específico.
-	 *
-	 * @param token    El token JWT a validar.
+	 * @param token El token JWT a validar.
 	 * @param customer El cliente para comparar con el token.
 	 * @return true si el token es válido, false en caso contrario.
 	 */
@@ -72,7 +68,6 @@ public class JwtService {
 
 	/**
 	 * Verifica si el token ha expirado.
-	 *
 	 * @param token El token JWT a verificar.
 	 * @return true si el token ha expirado, false en caso contrario.
 	 */
@@ -82,7 +77,6 @@ public class JwtService {
 
 	/**
 	 * Verifica si el token está activo.
-	 *
 	 * @param token El token JWT a verificar.
 	 * @return true si el token está activo, false en caso contrario.
 	 */
@@ -92,7 +86,6 @@ public class JwtService {
 
 	/**
 	 * Verifica si el token de actualización está activo.
-	 *
 	 * @param token El token JWT de actualización a verificar.
 	 * @return true si el token de actualización está activo, false en caso contrario.
 	 */
@@ -102,7 +95,6 @@ public class JwtService {
 
 	/**
 	 * Extrae la fecha de expiración del token JWT.
-	 *
 	 * @param token El token JWT del cual se extraerá la fecha de expiración.
 	 * @return La fecha de expiración del token.
 	 */
@@ -110,12 +102,11 @@ public class JwtService {
 		return extractClaim(token, Claims::getExpiration);
 	}
 
-/**
+	/**
 	 * Extrae un reclamo específico del token JWT utilizando un resolvedor de funciones.
-	 *
-	 * @param token    El token JWT del cual se extraerá el reclamo.
+	 * @param token El token JWT del cual se extraerá el reclamo.
 	 * @param resolver La función que define cómo extraer el reclamo.
-	 * @param <T>      El tipo del reclamo a extraer.
+	 * @param <T> El tipo del reclamo a extraer.
 	 * @return El valor del reclamo extraído.
 	 */
 	public <T> T extractClaim(String token, Function<Claims, T> resolver) {
@@ -125,7 +116,6 @@ public class JwtService {
 
 	/**
 	 * Extrae todos los reclamos del token JWT.
-	 *
 	 * @param token El token JWT del cual se extraerán todos los reclamos.
 	 * @return Un objeto Claims que contiene todos los reclamos del token.
 	 */
@@ -135,7 +125,6 @@ public class JwtService {
 
 	/**
 	 * Genera un token de acceso JWT para un cliente específico.
-	 *
 	 * @param customer El cliente para el cual se generará el token de acceso.
 	 * @return El token de acceso JWT generado.
 	 */
@@ -145,7 +134,6 @@ public class JwtService {
 
 	/**
 	 * Genera un token de actualización JWT para un cliente específico.
-	 *
 	 * @param customer El cliente para el cual se generará el token de actualización.
 	 * @return El token de actualización JWT generado.
 	 */
@@ -155,8 +143,7 @@ public class JwtService {
 
 	/**
 	 * Genera un token JWT para un cliente específico con una duración específica.
-	 *
-	 * @param customer           El cliente para el cual se generará el token.
+	 * @param customer El cliente para el cual se generará el token.
 	 * @param expirationInMillis La duración del token en milisegundos.
 	 * @return El token JWT generado.
 	 */
@@ -166,9 +153,13 @@ public class JwtService {
 
 		// Construye el token JWT con los detalles del cliente y la fecha de expiración
 		return Jwts.builder()
-			.subject(customer.getUsername()) // Establece el nombre de usuario como sujeto del token
-			.claim("role", customer.getRol().name()) // Agrega el rol del cliente como un reclamo
-			.issuedAt(new Date(System.currentTimeMillis())) // Establece la fecha de emisión del token
+			.subject(customer.getUsername()) // Establece el nombre de usuario como sujeto
+												// del token
+			.claim("role", customer.getRol().name()) // Agrega el rol del cliente como un
+														// reclamo
+			.claim("userId", customer.getId()) // Agrega el ID del usuario como un claim
+			.issuedAt(new Date(System.currentTimeMillis())) // Establece la fecha de
+															// emisión del token
 			.expiration(expirationDate) // Establece la fecha de expiración del token
 			.signWith(getSigninKey()) // Firma el token con la clave secreta
 			.compact(); // Devuelve el token JWT generado
@@ -176,13 +167,14 @@ public class JwtService {
 
 	/**
 	 * Obtiene la clave secreta utilizada para firmar los tokens JWT.
-	 *
 	 * @return La clave secreta como un objeto SecretKey.
 	 */
 	private SecretKey getSigninKey() {
-		// Decodifica la clave secreta desde una cadena Base64 URL y la convierte en un objeto SecretKey
+		// Decodifica la clave secreta desde una cadena Base64 URL y la convierte en un
+		// objeto SecretKey
 		byte[] keyBytes = Decoders.BASE64URL.decode(properties.getSecurity().getJwt().getSecretKey());
-		// Utiliza la clave decodificada para crear un SecretKey que se usará para firmar los tokens
+		// Utiliza la clave decodificada para crear un SecretKey que se usará para firmar
+		// los tokens
 		return Keys.hmacShaKeyFor(keyBytes);
 	}
 

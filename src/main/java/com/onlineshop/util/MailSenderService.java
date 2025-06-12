@@ -37,7 +37,6 @@ public class MailSenderService {
 
 	/**
 	 * Envía un correo electrónico de verificación al usuario después de su registro.
-	 *
 	 * @param user El usuario al que se le enviará el correo de verificación.
 	 * @throws BusinessException Si ocurre un error al enviar el correo electrónico.
 	 */
@@ -61,12 +60,12 @@ public class MailSenderService {
 	}
 
 	/**
-	 * Envía un correo electrónico al administrador cuando un usuario envía un mensaje a través del formulario de contacto.
-	 *
-	 * @param senderName    El nombre del remitente.
-	 * @param phoneNumber   El número de teléfono del remitente.
- 	 * @param gender        El género del remitente.
- 	 * @param emailMessage  El mensaje enviado por el remitente.
+	 * Envía un correo electrónico al administrador cuando un usuario envía un mensaje a
+	 * través del formulario de contacto.
+	 * @param senderName El nombre del remitente.
+	 * @param phoneNumber El número de teléfono del remitente.
+	 * @param gender El género del remitente.
+	 * @param emailMessage El mensaje enviado por el remitente.
 	 * @return Un objeto EmailResponse que indica el resultado del envío del correo.
 	 * @throws BusinessException Si ocurre un error al enviar el correo electrónico.
 	 */
@@ -92,8 +91,8 @@ public class MailSenderService {
 
 	/**
 	 * Envía un correo electrónico de recuperación de contraseña al usuario.
-	 *
-	 * @param email El correo electrónico del usuario que solicita la recuperación de contraseña.
+	 * @param email El correo electrónico del usuario que solicita la recuperación de
+	 * contraseña.
 	 * @return Un objeto EmailResponse que indica el resultado del envío del correo.
 	 * @throws BusinessException Si ocurre un error al enviar el correo electrónico.
 	 */
@@ -126,14 +125,15 @@ public class MailSenderService {
 	}
 
 	/**
-	 * Envía un correo electrónico con el contenido proporcionado al destinatario especificado.
-	 *
-	 * @param email       El correo electrónico del destinatario.
-	 * @param senderName  El nombre del remitente que aparecerá en el correo.
-	 * @param subject     El asunto del correo electrónico.
-	 * @param content     El contenido del correo electrónico, que puede incluir HTML.
+	 * Envía un correo electrónico con el contenido proporcionado al destinatario
+	 * especificado.
+	 * @param email El correo electrónico del destinatario.
+	 * @param senderName El nombre del remitente que aparecerá en el correo.
+	 * @param subject El asunto del correo electrónico.
+	 * @param content El contenido del correo electrónico, que puede incluir HTML.
 	 * @throws MessagingException Si ocurre un error al crear o enviar el mensaje.
-	 * @throws UnsupportedEncodingException Si ocurre un error al codificar el nombre del remitente.
+	 * @throws UnsupportedEncodingException Si ocurre un error al codificar el nombre del
+	 * remitente.
 	 */
 	private void sendMessage(String email, String senderName, String subject, String content)
 			throws MessagingException, UnsupportedEncodingException {
