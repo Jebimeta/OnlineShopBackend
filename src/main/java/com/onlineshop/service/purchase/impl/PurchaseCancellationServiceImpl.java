@@ -14,9 +14,9 @@ public class PurchaseCancellationServiceImpl implements PurchaseCancellationServ
 
 	private final PurchaseQueryService purchaseQueryService;
 
-	/* Metodo que cancela una compra por su ID
-	 * Cambia el estado de la compra a CANCELLATION_PENDING
-	 * y devuelve la compra obtenida
+	/*
+	 * Metodo que cancela una compra por su ID Cambia el estado de la compra a
+	 * CANCELLATION_PENDING y devuelve la compra obtenida
 	 */
 	@Override
 	public Purchase cancelPurchaseById(Long id) {
@@ -25,9 +25,9 @@ public class PurchaseCancellationServiceImpl implements PurchaseCancellationServ
 		return obtainedPurchase;
 	}
 
-	/* Metodo que cancela una compra por su ID
-	 * Cambia el estado de la compra a CANCELLED
-	 * y devuelve la compra obtenida
+	/*
+	 * Metodo que cancela una compra por su ID Cambia el estado de la compra a CANCELLED y
+	 * devuelve la compra obtenida
 	 */
 	@Override
 	public Purchase cancelPurchaseConfirmationById(Long id) {

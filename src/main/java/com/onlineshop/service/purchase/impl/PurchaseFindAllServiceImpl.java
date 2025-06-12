@@ -15,8 +15,9 @@ public class PurchaseFindAllServiceImpl implements PurchaseFindAllService {
 
 	private final PurchaseJpaRepository purchaseJpaRepository;
 
-	/* Metodo que obtiene todas las compras
-	 * Utiliza el repositorio JPA para obtener todas las compras y las devuelve
+	/*
+	 * Metodo que obtiene todas las compras Utiliza el repositorio JPA para obtener todas
+	 * las compras y las devuelve
 	 */
 	@Override
 	public List<Purchase> findAllPurchases() {

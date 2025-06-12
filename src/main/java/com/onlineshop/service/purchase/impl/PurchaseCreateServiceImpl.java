@@ -26,9 +26,9 @@ public class PurchaseCreateServiceImpl implements PurchaseCreateService {
 
 	private final AuthenticationService authenticationService;
 
-	/* Metodo que crea una compra
-	 * Obtiene el cliente autenticado, su ultimo carrito y crea una lista de detalles de compra
-	 * Finalmente guarda la compra y la devuelve
+	/*
+	 * Metodo que crea una compra Obtiene el cliente autenticado, su ultimo carrito y crea
+	 * una lista de detalles de compra Finalmente guarda la compra y la devuelve
 	 */
 	@Override
 	@Transactional
@@ -43,16 +43,18 @@ public class PurchaseCreateServiceImpl implements PurchaseCreateService {
 		return savePurchase(purchaseRequest, customer, purchaseDetailsList);
 	}
 
-	/* Método que obtiene el último carrito del cliente
-	 * Devuelve el último carrito de la lista de carritos del cliente
+	/*
+	 * Método que obtiene el último carrito del cliente Devuelve el último carrito de la
+	 * lista de carritos del cliente
 	 */
 	private Cart getCustomerLatestCart(Customer customer) {
 		return customer.getCart().get(customer.getCart().size() - 1);
 	}
 
-	/* Método que crea una lista de detalles de compra a partir del carrito
-	 * Recorre los detalles del carrito y crea una lista de PurchaseDetails
-	 * Devuelve la lista de PurchaseDetails
+	/*
+	 * Método que crea una lista de detalles de compra a partir del carrito Recorre los
+	 * detalles del carrito y crea una lista de PurchaseDetails Devuelve la lista de
+	 * PurchaseDetails
 	 */
 	private List<PurchaseDetails> createPurchaseDetailsList(Cart cart) {
 		List<PurchaseDetails> purchaseDetailsList = new ArrayList<>();
@@ -67,10 +69,10 @@ public class PurchaseCreateServiceImpl implements PurchaseCreateService {
 		return purchaseDetailsList;
 	}
 
-	/* Método que guarda la compra en la base de datos
-	 * Utiliza el PurchaseFactory para crear una entidad Purchase a partir de la solicitud de compra,
-	 * el cliente y la lista de detalles de compra
-	 * Devuelve la compra guardada
+	/*
+	 * Método que guarda la compra en la base de datos Utiliza el PurchaseFactory para
+	 * crear una entidad Purchase a partir de la solicitud de compra, el cliente y la
+	 * lista de detalles de compra Devuelve la compra guardada
 	 */
 	private Purchase savePurchase(PurchaseRequest purchaseRequest, Customer customer,
 			List<PurchaseDetails> purchaseDetailsList) {

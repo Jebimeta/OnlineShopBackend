@@ -24,9 +24,9 @@ public class PurchaseQueryServiceImpl implements PurchaseQueryService {
 
 	private final AuthenticationService authenticationService;
 
-	/* Metodo que obtiene una compra por su ID
-	 * Busca la compra por su ID, si existe valida que pertenezca al cliente autenticado
-	 * Si no existe, lanza una excepción de negocio
+	/*
+	 * Metodo que obtiene una compra por su ID Busca la compra por su ID, si existe valida
+	 * que pertenezca al cliente autenticado Si no existe, lanza una excepción de negocio
 	 */
 	@Override
 	@Transactional
@@ -36,8 +36,9 @@ public class PurchaseQueryServiceImpl implements PurchaseQueryService {
 		return checkPurchaseInCustomerPurchase(purchase);
 	}
 
-	/* Metodo que obtiene todas las compras del cliente autenticado
-	 * Obtiene las compras del cliente autenticado y las devuelve
+	/*
+	 * Metodo que obtiene todas las compras del cliente autenticado Obtiene las compras
+	 * del cliente autenticado y las devuelve
 	 */
 	private Purchase checkPurchaseInCustomerPurchase(Purchase purchase) {
 		List<Purchase> customerPurchases = getCustomerPurchases();
@@ -45,16 +46,18 @@ public class PurchaseQueryServiceImpl implements PurchaseQueryService {
 		return purchase;
 	}
 
-	/* Metodo que obtiene todas las compras del cliente autenticado
-	 * Obtiene las compras del cliente autenticado y las devuelve
+	/*
+	 * Metodo que obtiene todas las compras del cliente autenticado Obtiene las compras
+	 * del cliente autenticado y las devuelve
 	 */
 	private List<Purchase> getCustomerPurchases() {
 		List<Purchase> customerPurchases = authenticationService.findUserByTokenAccess().getPurchases();
 		return customerPurchases != null ? customerPurchases : Collections.emptyList();
 	}
 
-	/* Metodo que valida que la compra pertenezca al cliente autenticado
-	 * Si la compra no pertenece al cliente, lanza una excepción de negocio
+	/*
+	 * Metodo que valida que la compra pertenezca al cliente autenticado Si la compra no
+	 * pertenece al cliente, lanza una excepción de negocio
 	 */
 	private void validatePurchaseInCustomerPurchases(Purchase purchase, List<Purchase> customerPurchases) {
 		if (!customerPurchases.contains(purchase)) {

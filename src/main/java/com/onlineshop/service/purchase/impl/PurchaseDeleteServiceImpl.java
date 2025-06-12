@@ -17,9 +17,9 @@ public class PurchaseDeleteServiceImpl implements PurchaseDeleteService {
 
 	private final PurchaseJpaRepository purchaseJpaRepository;
 
-	/* Metodo que elimina una compra por su ID
-	 * Busca la compra por su ID, si existe la elimina y devuelve un mensaje de éxito
-	 * Si no existe, lanza una excepción de negocio
+	/*
+	 * Metodo que elimina una compra por su ID Busca la compra por su ID, si existe la
+	 * elimina y devuelve un mensaje de éxito Si no existe, lanza una excepción de negocio
 	 */
 	@Override
 	public String deletePurchaseById(Long orderId) {
