@@ -30,7 +30,6 @@ public class CartFindQueryServiceImpl {
 
 	/**
 	 * Método que busca un producto por su ID.
-	 *
 	 * @param details Objeto CartDetailsRequest que contiene el ID del producto a buscar.
 	 * @return Product objeto que representa el producto encontrado.
 	 * @throws BusinessException si el producto no se encuentra.
@@ -44,10 +43,10 @@ public class CartFindQueryServiceImpl {
 
 	/**
 	 * Método que busca un carrito por su ID.
-	 *
 	 * @param id ID del carrito a buscar.
 	 * @return Cart objeto que representa el carrito encontrado.
-	 * @throws BusinessException si el carrito no se encuentra o no pertenece al cliente autenticado.
+	 * @throws BusinessException si el carrito no se encuentra o no pertenece al cliente
+	 * autenticado.
 	 */
 	@Transactional
 	public Cart findCartById(Long id) {
@@ -57,11 +56,12 @@ public class CartFindQueryServiceImpl {
 	}
 
 	/**
-	 * Método que busca un carrito por su ID y lo valida en los carritos del cliente autenticado.
-	 *
+	 * Método que busca un carrito por su ID y lo valida en los carritos del cliente
+	 * autenticado.
 	 * @param cart Objeto Cart que contiene el ID del carrito a buscar.
 	 * @return Cart objeto que representa el carrito encontrado y validado.
-	 * @throws BusinessException si el carrito no se encuentra o no pertenece al cliente autenticado.
+	 * @throws BusinessException si el carrito no se encuentra o no pertenece al cliente
+	 * autenticado.
 	 */
 	private Cart checkCartInCustomerCart(Cart cart) {
 		List<Cart> customerCarts = getCustomerCarts();
@@ -71,7 +71,6 @@ public class CartFindQueryServiceImpl {
 
 	/**
 	 * Método que obtiene los carritos del cliente autenticado.
-	 *
 	 * @return Lista de objetos Cart que representan los carritos del cliente.
 	 */
 	private List<Cart> getCustomerCarts() {
@@ -81,8 +80,7 @@ public class CartFindQueryServiceImpl {
 
 	/**
 	 * Método que valida si el carrito pertenece a los carritos del cliente autenticado.
-	 *
-	 * @param cart          Objeto Cart que se va a validar.
+	 * @param cart Objeto Cart que se va a validar.
 	 * @param customerCarts Lista de carritos del cliente autenticado.
 	 * @throws BusinessException si el carrito no pertenece al cliente autenticado.
 	 */

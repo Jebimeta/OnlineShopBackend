@@ -17,11 +17,11 @@ public class CartUpdateServiceImpl implements CartUpdateService {
 
 	/**
 	 * Método que actualiza un carrito existente.
-	 *
 	 * @param cartId ID del carrito a actualizar.
 	 * @param cartRequest Objeto Cart que contiene los nuevos detalles del carrito.
 	 * @return Cart objeto que representa el carrito actualizado.
-	 * @throws BusinessException si el carrito no se encuentra o si la solicitud es inválida.
+	 * @throws BusinessException si el carrito no se encuentra o si la solicitud es
+	 * inválida.
 	 */
 	@Override
 	public Cart updateCart(Long cartId, Cart cartRequest) throws BusinessException {
@@ -39,7 +39,6 @@ public class CartUpdateServiceImpl implements CartUpdateService {
 
 	/**
 	 * Método que valida la solicitud de actualización del carrito.
-	 *
 	 * @param cartRequest Objeto Cart que contiene los detalles del carrito a actualizar.
 	 * @throws BusinessException si la solicitud es inválida.
 	 */
@@ -48,4 +47,5 @@ public class CartUpdateServiceImpl implements CartUpdateService {
 			throw new BusinessException(AppErrorCode.ERROR_INVALID_CART_REQUEST);
 		}
 	}
+
 }

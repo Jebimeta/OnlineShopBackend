@@ -22,7 +22,6 @@ public class CartCreateServiceImpl implements CartCreateService {
 
 	/**
 	 * Método que crea un nuevo carrito con los detalles proporcionados.
-	 *
 	 * @param cart Objeto Cart que contiene los detalles del carrito a crear.
 	 * @return Cart objeto que representa el carrito creado.
 	 * @throws BusinessException si no se proporcionan detalles del carrito.

@@ -17,7 +17,6 @@ public class CartFindAllServiceImpl implements CartFindAllService {
 
 	/**
 	 * Método que obtiene todos los carritos.
-	 *
 	 * @return Lista de objetos Cart que representan todos los carritos.
 	 */
 	@Override

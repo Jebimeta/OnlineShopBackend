@@ -16,9 +16,9 @@ public class RemoveProductFromCartServiceImpl implements RemoveProductFromCartSe
 
 	/**
 	 * Método que elimina un producto de un carrito por su ID.
-	 *
 	 * @param cartId ID del carrito del cual se eliminará el producto.
-	 * @param cartDetailsId ID del detalle del carrito que representa el producto a eliminar.
+	 * @param cartDetailsId ID del detalle del carrito que representa el producto a
+	 * eliminar.
 	 * @return Mensaje de éxito si el producto fue eliminado correctamente.
 	 * @throws BusinessException si el producto no se encuentra en el carrito.
 	 */
@@ -32,4 +32,5 @@ public class RemoveProductFromCartServiceImpl implements RemoveProductFromCartSe
 			throw new BusinessException(AppErrorCode.ERROR_PRODUCT_NOT_FOUND);
 		}
 	}
+
 }

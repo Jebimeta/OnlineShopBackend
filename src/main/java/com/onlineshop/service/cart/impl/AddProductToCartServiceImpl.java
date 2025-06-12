@@ -25,10 +25,10 @@ public class AddProductToCartServiceImpl implements AddProductToCartService {
 
 	/**
 	 * Método que agrega un producto al carrito.
-	 *
-	 * @param cartId   ID del carrito al que se le agregará el producto.
-	 * @param request  Objeto que contiene los detalles del producto a agregar.
-	 * @return CartDetails objeto que representa los detalles del producto agregado al carrito.
+	 * @param cartId ID del carrito al que se le agregará el producto.
+	 * @param request Objeto que contiene los detalles del producto a agregar.
+	 * @return CartDetails objeto que representa los detalles del producto agregado al
+	 * carrito.
 	 */
 	@Override
 	public CartDetails addProductToCart(Long cartId, CartDetailsRequest request) {

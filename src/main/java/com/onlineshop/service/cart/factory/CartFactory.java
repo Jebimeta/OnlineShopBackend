@@ -32,7 +32,6 @@ public class CartFactory {
 
 	/**
 	 * Método que crea un carrito con los detalles del cliente y los productos.
-	 *
 	 * @param cartRequest Objeto que contiene la información del carrito a crear.
 	 * @return Cart objeto que representa el carrito creado.
 	 */
@@ -67,4 +66,5 @@ public class CartFactory {
 
 		return cart;
 	}
+
 }

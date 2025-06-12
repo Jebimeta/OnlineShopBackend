@@ -17,7 +17,6 @@ public class CartDeleteServiceImpl implements CartDeleteService {
 
 	/**
 	 * Método que elimina un carrito por su ID.
-	 *
 	 * @param id ID del carrito a eliminar.
 	 * @return Mensaje de éxito si el carrito fue eliminado correctamente.
 	 * @throws BusinessException si el carrito no se encuentra.
