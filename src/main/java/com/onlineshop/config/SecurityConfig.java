@@ -62,7 +62,7 @@ public class SecurityConfig {
 					IMAGES_URL.getUrl(), VERIFY_TOKEN_URL.getUrl(), SEND_EMAIL_URL.getUrl(), ADD_PRODUCT_URL.getUrl(),
 					OBTAIN_CART_URL.getUrl(), DELETE_CART_URL.getUrl(), OBTAIN_ALL_CARTS_URL.getUrl(),
 					REMOVE_PRODUCT_FROM_CART_URL.getUrl(), OBTAIN_ALL_PURCHASES_URL.getUrl(),
-					OBTAIN_PURCHASE_BY_ID_URL.getUrl(), REQUEST_PURCHASE_CANCELLATION.getUrl())
+					OBTAIN_PURCHASE_BY_ID_URL.getUrl(), REQUEST_PURCHASE_CANCELLATION.getUrl(), CART_PRODUCTS_BY_CUSTOMER_ID_URL.getUrl())
 			.permitAll()
 			.requestMatchers(CREATE_PRODUCT_URL.getUrl(), UPDATE_PRODUCT_URL.getUrl(), DELETE_PRODUCT_URL.getUrl(),
 					USERS_LIST_URL.getUrl(), OBTAIN_USER_BY_ID_URL.getUrl(), VALIDATION_PURCHASE_CANCELLATION.getUrl())
@@ -95,7 +95,7 @@ public class SecurityConfig {
 			.authenticationEntryPoint(new HttpStatusEntryPoint(HttpStatus.UNAUTHORIZED)));
 	}
 
-// Configura el cierre de sesión personalizado.
+	// Configura el cierre de sesión personalizado.
 	private void configureLogout(HttpSecurity http) throws Exception {
 		http.logout(logout -> logout.logoutUrl("/logout")
 			.addLogoutHandler(logoutHandler)
@@ -108,7 +108,8 @@ public class SecurityConfig {
 		return new BCryptPasswordEncoder();
 	}
 
-	// Bean para el administrador de autenticación, que permite la autenticación de usuarios.
+	// Bean para el administrador de autenticación, que permite la autenticación de
+	// usuarios.
 	@Bean
 	public AuthenticationManager authenticationManager(AuthenticationConfiguration configuration) throws Exception {
 		return configuration.getAuthenticationManager();

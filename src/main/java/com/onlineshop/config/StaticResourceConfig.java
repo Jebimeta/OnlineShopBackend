@@ -15,7 +15,6 @@ public class StaticResourceConfig implements WebMvcConfigurer {
 
 	/**
 	 * Configura los manejadores de recursos estáticos para servir imágenes de productos.
-	 *
 	 * @param registry el registro de manejadores de recursos
 	 */
 	@Override

@@ -16,7 +16,8 @@ public class MailSenderConfig {
 
 	private final OnlineShopProperties properties;
 
-	// Método que crea y configura un bean de JavaMailSender para enviar correos electrónicos.
+	// Método que crea y configura un bean de JavaMailSender para enviar correos
+	// electrónicos.
 	@Bean
 	public JavaMailSender getJavaMailSender() {
 		JavaMailSenderImpl mailSender = new JavaMailSenderImpl();

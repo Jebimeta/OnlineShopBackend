@@ -11,7 +11,6 @@ public class WebConfig {
 
 	/**
 	 * Configura CORS para permitir solicitudes desde cualquier origen.
-	 *
 	 * @return un WebMvcConfigurer que configura CORS
 	 */
 	@Bean
