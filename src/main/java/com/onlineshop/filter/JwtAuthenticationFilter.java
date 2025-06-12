@@ -32,9 +32,9 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 	private final UserDetailsServiceImpl userDetailsService;
 
 	/**
-	 * Método que se ejecuta para filtrar las peticiones HTTP y autenticar al usuario si es necesario.
-	 *
-	 * @param request  la solicitud HTTP entrante
+	 * Método que se ejecuta para filtrar las peticiones HTTP y autenticar al usuario si
+	 * es necesario.
+	 * @param request la solicitud HTTP entrante
 	 * @param response la respuesta HTTP a enviar
 	 * @param filterChain la cadena de filtros a seguir
 	 * @throws ServletException si ocurre un error en el procesamiento del filtro
@@ -60,7 +60,6 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
 	/**
 	 * Extrae el token JWT del encabezado de autorización.
-	 *
 	 * @param authHeader el encabezado de autorización
 	 * @return el token JWT si está presente, o null si no lo está
 	 */
@@ -73,7 +72,6 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
 	/**
 	 * Verifica si el encabezado de autorización contiene un token Bearer.
-	 *
 	 * @param authHeader el encabezado de autorización
 	 * @return true si el encabezado contiene un token Bearer, false en caso contrario
 	 */
@@ -83,7 +81,6 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
 	/**
 	 * Verifica si ya hay una autenticación presente en el contexto de seguridad.
-	 *
 	 * @return true si hay una autenticación presente, false en caso contrario
 	 */
 	private boolean isAuthenticationPresent() {
@@ -92,7 +89,6 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
 	/**
 	 * Autentica al usuario utilizando el token JWT extraído.
-	 *
 	 * @param token el token JWT
 	 * @param request la solicitud HTTP
 	 */
@@ -106,9 +102,8 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 		}
 	}
 
-/**
+	/**
 	 * Establece la autenticación del usuario en el contexto de seguridad.
-	 *
 	 * @param userDetails los detalles del usuario autenticado
 	 * @param request la solicitud HTTP
 	 */
@@ -118,4 +113,5 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 		authToken.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
 		SecurityContextHolder.getContext().setAuthentication(authToken);
 	}
+
 }
