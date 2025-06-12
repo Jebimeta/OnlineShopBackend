@@ -18,10 +18,10 @@ public class CustomerQueryServiceImpl implements CustomerQueryService {
 
 	/**
 	 * Obtiene un cliente por su nombre de usuario.
-	 *
 	 * @param username el nombre de usuario del cliente a buscar
 	 * @return el cliente encontrado
-	 * @throws UsernameNotFoundException si no se encuentra un cliente con el nombre de usuario proporcionado
+	 * @throws UsernameNotFoundException si no se encuentra un cliente con el nombre de
+	 * usuario proporcionado
 	 */
 	@Override
 	public Customer getCustomerByUserName(String username) {

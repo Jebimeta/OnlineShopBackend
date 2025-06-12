@@ -20,7 +20,6 @@ public class CustomerVerificationTokenServiceImpl implements CustomerVerificatio
 
 	/**
 	 * Genera un token de verificación único para el cliente.
-	 *
 	 * @param customer el cliente para el cual se genera el token
 	 * @return un token de verificación único
 	 */
@@ -31,10 +30,10 @@ public class CustomerVerificationTokenServiceImpl implements CustomerVerificatio
 
 	/**
 	 * Verifica al cliente utilizando el token proporcionado.
-	 *
 	 * @param token el token de verificación del cliente
 	 * @return el cliente verificado
-	 * @throws BusinessException si el token es inválido o no se encuentra un cliente asociado
+	 * @throws BusinessException si el token es inválido o no se encuentra un cliente
+	 * asociado
 	 */
 	@Override
 	public Customer verifyCustomerByToken(String token) {
@@ -53,7 +52,6 @@ public class CustomerVerificationTokenServiceImpl implements CustomerVerificatio
 
 	/**
 	 * Busca un cliente por su token de verificación.
-	 *
 	 * @param token el token de verificación del cliente
 	 * @return el cliente asociado al token
 	 * @throws BusinessException si no se encuentra un cliente con el token proporcionado

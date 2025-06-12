@@ -18,15 +18,14 @@ public class CustomerDeleteServiceImpl implements CustomerDeleteService {
 
 	/**
 	 * Elimina un cliente por su nombre de usuario.
-	 *
 	 * @param username el nombre de usuario del cliente a eliminar
 	 * @return null si el cliente fue eliminado correctamente
-	 * @throws UsernameNotFoundException si no se encuentra un cliente con el nombre de usuario proporcionado
+	 * @throws UsernameNotFoundException si no se encuentra un cliente con el nombre de
+	 * usuario proporcionado
 	 */
-	@Override
+
 	public Void deleteCustomerByUsername(String username) {
 		Optional<Customer> customerEntity = customerJpaRepository.findByUsername(username);
-
 		if (customerEntity.isPresent()) {
 			customerJpaRepository.delete(customerEntity.get());
 			return null;
@@ -34,7 +33,6 @@ public class CustomerDeleteServiceImpl implements CustomerDeleteService {
 		else {
 			throw new UsernameNotFoundException("User not found");
 		}
-
 	}
 
 }

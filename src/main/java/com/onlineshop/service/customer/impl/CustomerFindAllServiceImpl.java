@@ -19,7 +19,6 @@ public class CustomerFindAllServiceImpl implements CustomerFindAllService {
 
 	/**
 	 * Obtiene todos los clientes.
-	 *
 	 * @return una lista de todos los clientes
 	 */
 	@Override

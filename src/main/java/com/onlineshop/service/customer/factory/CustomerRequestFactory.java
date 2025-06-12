@@ -15,7 +15,6 @@ public class CustomerRequestFactory {
 
 	/**
 	 * Crea un objeto Customer a partir de una solicitud de cliente.
-	 *
 	 * @param request el objeto Customer que contiene los datos de la solicitud
 	 * @return un nuevo objeto Customer con los datos proporcionados
 	 */

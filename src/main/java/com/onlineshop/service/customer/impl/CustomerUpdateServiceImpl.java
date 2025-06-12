@@ -24,10 +24,10 @@ public class CustomerUpdateServiceImpl implements CustomerUpdateService {
 
 	/**
 	 * Actualiza un cliente con los datos proporcionados.
-	 *
 	 * @param customerUpdateRequest el objeto Customer con los datos a actualizar
 	 * @return el cliente actualizado
-	 * @throws UsernameNotFoundException si no se encuentra un cliente con el email proporcionado
+	 * @throws UsernameNotFoundException si no se encuentra un cliente con el email
+	 * proporcionado
 	 */
 	@Override
 	public Customer updateCustomer(Customer customerUpdateRequest) {
