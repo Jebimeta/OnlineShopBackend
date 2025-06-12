@@ -24,10 +24,10 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 
 	/**
 	 * Carga los detalles del usuario por su nombre de usuario.
-	 *
 	 * @param username El nombre de usuario del cliente.
 	 * @return Un objeto UserDetails que contiene la información del usuario.
-	 * @throws UsernameNotFoundException Si el usuario no se encuentra en la base de datos.
+	 * @throws UsernameNotFoundException Si el usuario no se encuentra en la base de
+	 * datos.
 	 */
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {

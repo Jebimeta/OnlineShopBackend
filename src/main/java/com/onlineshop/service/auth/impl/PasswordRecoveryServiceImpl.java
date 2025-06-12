@@ -24,7 +24,6 @@ public class PasswordRecoveryServiceImpl implements PasswordRecoveryService {
 
 	/**
 	 * Envía un correo electrónico para la recuperación de contraseña.
-	 *
 	 * @param passwordResetRequest Objeto que contiene el correo electrónico del cliente.
 	 * @return Un objeto EmailResponse que contiene el estado del envío del correo.
 	 */
@@ -35,8 +34,8 @@ public class PasswordRecoveryServiceImpl implements PasswordRecoveryService {
 
 	/**
 	 * Confirma la recuperación de contraseña y actualiza la contraseña del cliente.
-	 *
-	 * @param passwordResetConfirmRequest Objeto que contiene el token de verificación y la nueva contraseña.
+	 * @param passwordResetConfirmRequest Objeto que contiene el token de verificación y
+	 * la nueva contraseña.
 	 * @return El objeto Customer actualizado con la nueva contraseña.
 	 */
 	@Override

@@ -48,16 +48,18 @@ public class AuthenticationService {
 	private final CustomerRequestFactory customerRequestFactory;
 
 	/**
-	 * Autentica a un cliente utilizando su correo electrónico y contraseña.
-	 * Si la autenticación es exitosa, genera un token de acceso y un token de actualización.
-	 *
-	 * @param loginRequest Objeto que contiene el correo electrónico y la contraseña del cliente.
-	 * @return Un objeto AuthenticationResponse que contiene los tokens generados y un mensaje de éxito.
+	 * Autentica a un cliente utilizando su correo electrónico y contraseña. Si la
+	 * autenticación es exitosa, genera un token de acceso y un token de actualización.
+	 * @param loginRequest Objeto que contiene el correo electrónico y la contraseña del
+	 * cliente.
+	 * @return Un objeto AuthenticationResponse que contiene los tokens generados y un
+	 * mensaje de éxito.
 	 */
 	public AuthenticationResponse authenticate(Customer loginRequest) {
 		log.info("INIT - AuthenticationService -> authenticate()");
 
-		authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(loginRequest.getEmail(), loginRequest.getPassword()));
+		authenticationManager
+			.authenticate(new UsernamePasswordAuthenticationToken(loginRequest.getEmail(), loginRequest.getPassword()));
 
 		Customer user = repository.findByEmail(loginRequest.getEmail()).orElseThrow();
 
@@ -77,9 +79,8 @@ public class AuthenticationService {
 	}
 
 	/**
-	 * Registra un nuevo cliente en el sistema.
-	 * Si el correo electrónico ya está registrado, devuelve un mensaje de error.
-	 *
+	 * Registra un nuevo cliente en el sistema. Si el correo electrónico ya está
+	 * registrado, devuelve un mensaje de error.
 	 * @param request Objeto que contiene los datos del cliente a registrar.
 	 * @return Un objeto RegisterResponse que indica el resultado del registro.
 	 */
@@ -99,12 +100,13 @@ public class AuthenticationService {
 		return response;
 	}
 
-/**
-	 * Envía un correo electrónico de verificación al cliente después de registrarse.
-	 * Si ocurre un error al enviar el correo, elimina el usuario del repositorio y devuelve un mensaje de error.
-	 *
+	/**
+	 * Envía un correo electrónico de verificación al cliente después de registrarse. Si
+	 * ocurre un error al enviar el correo, elimina el usuario del repositorio y devuelve
+	 * un mensaje de error.
 	 * @param user El cliente que se ha registrado.
-	 * @return Un objeto RegisterResponse que indica el resultado del envío del correo electrónico.
+	 * @return Un objeto RegisterResponse que indica el resultado del envío del correo
+	 * electrónico.
 	 */
 	private RegisterResponse sendVerificationEmail(Customer user) {
 		try {
@@ -122,11 +124,12 @@ public class AuthenticationService {
 	}
 
 	/**
-	 * Verifica al usuario utilizando el token de verificación.
-	 * Si la verificación es exitosa, actualiza el estado del cliente y genera nuevos tokens de acceso y actualización.
-	 *
+	 * Verifica al usuario utilizando el token de verificación. Si la verificación es
+	 * exitosa, actualiza el estado del cliente y genera nuevos tokens de acceso y
+	 * actualización.
 	 * @param token El token de verificación enviado al correo electrónico del cliente.
-	 * @return Un objeto AuthenticationResponse que contiene los nuevos tokens generados y un mensaje de éxito.
+	 * @return Un objeto AuthenticationResponse que contiene los nuevos tokens generados y
+	 * un mensaje de éxito.
 	 */
 	public AuthenticationResponse verifyUser(String token) {
 		try {
@@ -151,9 +154,8 @@ public class AuthenticationService {
 	}
 
 	/**
-	 * Obtiene el usuario autenticado actualmente.
-	 * Utiliza el contexto de seguridad para obtener el nombre de usuario del principal autenticado.
-	 *
+	 * Obtiene el usuario autenticado actualmente. Utiliza el contexto de seguridad para
+	 * obtener el nombre de usuario del principal autenticado.
 	 * @return Un objeto CustomerResponse que representa al usuario autenticado.
 	 */
 	public CustomerResponse getAuthenticatedUser() {
@@ -166,9 +168,8 @@ public class AuthenticationService {
 	}
 
 	/**
-	 * Obtiene el nombre de usuario del principal autenticado.
-	 * Si el principal no es una instancia de UserDetails, lanza una excepción.
-	 *
+	 * Obtiene el nombre de usuario del principal autenticado. Si el principal no es una
+	 * instancia de UserDetails, lanza una excepción.
 	 * @param principal El principal autenticado.
 	 * @return El nombre de usuario del principal.
 	 */
@@ -180,7 +181,6 @@ public class AuthenticationService {
 	/**
 	 * Lanza una excepción de negocio indicando que el usuario no está autenticado.
 	 * Utiliza un código de error específico para indicar el problema.
-	 *
 	 * @return Nunca retorna, lanza una excepción.
 	 */
 	private String throwUserNotAuthenticatedException() {
@@ -188,13 +188,13 @@ public class AuthenticationService {
 	}
 
 	/**
-	 * Busca al usuario autenticado por su token de acceso.
-	 * Utiliza el servicio de consulta de clientes para obtener el cliente por su nombre de usuario.
-	 *
+	 * Busca al usuario autenticado por su token de acceso. Utiliza el servicio de
+	 * consulta de clientes para obtener el cliente por su nombre de usuario.
 	 * @return El cliente autenticado.
 	 */
 	public Customer findUserByTokenAccess() {
 		CustomerResponse customerResponse = getAuthenticatedUser();
 		return customerQueryService.getCustomerByUserName(customerResponse.getUsername());
 	}
+
 }
