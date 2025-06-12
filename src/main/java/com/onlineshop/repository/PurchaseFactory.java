@@ -18,7 +18,8 @@ public class PurchaseFactory {
 		// Se utiliza para evitar la instanciación de esta clase.
 	}
 
-	// Método para crear una instancia de Purchase a partir de un PurchaseRequest, Customer y una lista de PurchaseDetails
+	// Método para crear una instancia de Purchase a partir de un PurchaseRequest,
+	// Customer y una lista de PurchaseDetails
 	public static Purchase createPurchaseFromPurchaseRequest(PurchaseRequest purchaseRequest, Customer customer,
 			List<PurchaseDetails> purchaseDetailsList) {
 		return Purchase.builder()
@@ -31,7 +32,8 @@ public class PurchaseFactory {
 			.build();
 	}
 
-	// Método privado para calcular el monto total de la compra a partir de una lista de PurchaseDetails
+	// Método privado para calcular el monto total de la compra a partir de una lista de
+	// PurchaseDetails
 	private static float calculateTotalAmount(List<PurchaseDetails> purchaseDetailsList) {
 		float totalAmount = 0;
 		for (PurchaseDetails details : purchaseDetailsList) {

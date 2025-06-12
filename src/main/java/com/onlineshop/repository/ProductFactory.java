@@ -23,13 +23,12 @@ public class ProductFactory {
 
 	/**
 	 * Método para construir un objeto Product a partir de los parámetros proporcionados.
-	 *
-	 * @param name        Nombre del producto.
+	 * @param name Nombre del producto.
 	 * @param description Descripción del producto.
-	 * @param size        Tamaño del producto.
-	 * @param type        Tipo del producto.
-	 * @param price       Precio del producto.
-	 * @param image       Imagen del producto como MultipartFile.
+	 * @param size Tamaño del producto.
+	 * @param type Tipo del producto.
+	 * @param price Precio del producto.
+	 * @param image Imagen del producto como MultipartFile.
 	 * @return Un objeto Product construido con los parámetros proporcionados.
 	 * @throws IOException Si ocurre un error al guardar la imagen.
 	 */
