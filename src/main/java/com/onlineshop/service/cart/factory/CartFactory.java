@@ -17,6 +17,7 @@ import org.springframework.stereotype.Component;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 // Factory que crea un carrito con los detalles del cliente y los productos
 @Slf4j
@@ -47,18 +48,17 @@ public class CartFactory {
 		cart.setDate(LocalDateTime.now());
 
 		// Verifica si se proporcionaron detalles del carrito
-		List<CartDetails> cartDetailsList = new ArrayList<>();
-		CartDetails cartDetails = new CartDetails();
-		cartDetails.setCart(cart);
-
-		// Itera sobre los detalles del carrito proporcionados en la solicitud
-		for (CartDetailsRequest details : cartRequest.getCartDetails()) {
-			Product product = cartFindQueryServiceImpl.findProductById(details);
-			cartDetails.setProduct(product);
-			cartDetails.setQuantity(details.getQuantity());
-			cartDetails.setPrice(product.getPrice() * details.getQuantity());
-			cartDetailsList.add(cartDetails);
-		}
+		List<CartDetails> cartDetailsList = cartRequest.getCartDetails().stream()
+			.map(details -> {
+				CartDetails cartDetails = new CartDetails();
+				cartDetails.setCart(cart);
+				Product product = cartFindQueryServiceImpl.findProductById(details);
+				cartDetails.setProduct(product);
+				cartDetails.setQuantity(details.getQuantity());
+				cartDetails.setPrice(product.getPrice() * details.getQuantity());
+				return cartDetails;
+			})
+			.collect(Collectors.toList());
 		// Establece los detalles del carrito en el carrito
 		cart.setCartDetails(cartDetailsList);
 
