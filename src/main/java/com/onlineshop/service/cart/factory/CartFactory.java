@@ -1,6 +1,5 @@
 package com.onlineshop.service.cart.factory;
 
-import com.onlineshop.domain.vo.CartDetailsRequest;
 import com.onlineshop.domain.vo.CartRequest;
 import com.onlineshop.domain.vo.CustomerResponse;
 import com.onlineshop.repository.entities.Cart;
@@ -15,7 +14,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -48,22 +46,18 @@ public class CartFactory {
 		cart.setDate(LocalDateTime.now());
 
 		// Verifica si se proporcionaron detalles del carrito
-		List<CartDetails> cartDetailsList = cartRequest.getCartDetails().stream()
-			.map(details -> {
-				CartDetails cartDetails = new CartDetails();
-				cartDetails.setCart(cart);
-				Product product = cartFindQueryServiceImpl.findProductById(details);
-				cartDetails.setProduct(product);
-				cartDetails.setQuantity(details.getQuantity());
-				cartDetails.setPrice(product.getPrice() * details.getQuantity());
-				return cartDetails;
-			})
-			.collect(Collectors.toList());
-		// Establece los detalles del carrito en el carrito
+		List<CartDetails> cartDetailsList = cartRequest.getCartDetails().stream().map(details -> {
+			CartDetails cartDetails = new CartDetails();
+			cartDetails.setCart(cart);
+			Product product = cartFindQueryServiceImpl.findProductById(details);
+			cartDetails.setProduct(product);
+			cartDetails.setQuantity(details.getQuantity());
+			cartDetails.setPrice(product.getPrice() * details.getQuantity());
+			cartDetails.setDeliveryAddress(cartRequest.getDeliveryAddress());
+			return cartDetails;
+		}).collect(Collectors.toList());
 		cart.setCartDetails(cartDetailsList);
-
 		log.info("END - CartFactory -> createCartWithCustomerAndCartDetails() - The cart was created successfully");
-
 		return cart;
 	}
 
