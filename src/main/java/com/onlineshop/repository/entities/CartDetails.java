@@ -27,4 +27,6 @@ public class CartDetails {
 
 	private Integer quantity;
 
+	private String deliveryAddress;
+
 }
