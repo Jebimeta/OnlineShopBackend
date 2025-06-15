@@ -11,7 +11,7 @@ import org.springframework.core.convert.converter.Converter;
 @Mapper(componentModel = "spring", uses = { CartDetailsToCartDetailsResponseMapper.class })
 public interface CartToCartResponseMapper extends Converter<Cart, CartResponse> {
 
-	@Mapping(source = "id", target = "userId")
+	@Mapping(source = "customer.id", target = "userId")
 	CartResponse convert(@NonNull Cart source);
 
 }
