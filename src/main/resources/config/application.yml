@@ -10,9 +10,9 @@ spring:
     name: '@project.artifactId@'
     version: '@project.version@'
   datasource:
-    url: jdbc:mysql://localhost:3306/online_shop
+    url: jdbc:mysql://@trolley.proxy.rlwy.net:42810/railway
     username: root
-    password: root
+    password: afdilNrIKsnqBalHKYVILsyPCqaLLLOj
     driver-class-name: com.mysql.cj.jdbc.Driver
   jpa:
     hibernate:
@@ -38,7 +38,7 @@ spring:
     default-encoding: UTF-8
   web:
     resources:
-      static-locations: classpath:/static/, file:C:/Users/Mi Jozé/Desktop/OnlineShop/OnlineShopBackend/src/main/resources/static/products/images
+      static-locations: file:/static/products/images/
   servlet:
     multipart:
       max-file-size: 10MB
@@ -46,9 +46,9 @@ spring:
 
 ritarouge:
   upload:
-    directory: src/main/resources/static/products/images/
+    directory: static/products/images/
     baseUrl: http://localhost:8080/products/images/
-    localDirectory: file:C:/Users/Mi Jozé/Desktop/OnlineShop/OnlineShopBackend/src/main/resources/static/products/images/
+    localDirectory: file:/static/products/images/
   mail:
     hostEmail: proyectoopositaweb@gmail.com
     host: http://localhost:4200
