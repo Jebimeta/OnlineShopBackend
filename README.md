@@ -15,11 +15,11 @@ Una vez el proyecto ha sido compilado se deben cambiar las rutas del apartado "u
 spring:
     web:
       resources:
-        static-locations: classpath:/static/, file:D:/Github/ritarouge/src/main/resources/static/products/images
+        static-locations: classpath:/static/, file:C:/Users/Mi Jozé/Desktop/OnlineShop/OnlineShopBackend/src/main/resources/static/products/images
     
 ritarouge:
   upload:
-    localDirectory: file:D:/Github/ritarouge/src/main/resources/static/products/images/
+    localDirectory: file:C:/Users/Mi Jozé/Desktop/OnlineShop/OnlineShopBackend/src/main/resources/static/products/images/
 
 ```
 
