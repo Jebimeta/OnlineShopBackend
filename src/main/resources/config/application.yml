@@ -47,7 +47,7 @@ spring:
 ritarouge:
   upload:
     directory: https://onlineshopbackend-f98u.onrender.com/products/images/
-    baseUrl: https://onlineshopbackend-f98u.onrender.com/products/images/
+    baseUrl: https://onlineshopbackend-f98u.onrender.com/products/images
     localDirectory: https://onlineshopbackend-f98u.onrender.com/products/images/
   mail:
     hostEmail: proyectoopositaweb@gmail.com
