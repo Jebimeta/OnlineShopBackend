@@ -1,21 +1,9 @@
-# Stage 1: Build the application
-FROM eclipse-temurin:17-jdk AS builder
-# Set the working directory
-WORKDIR /app
-# Copy the application code
-COPY . .
-# Given permissions to mvnw
-RUN chmod +x mvnw
-# Build the application (requires Maven or Gradle)
-RUN ./mvnw clean package -DskipTests
+FROM openjdk:17-jdk-alpine
 
-# Stage 2: Run the application
-FROM eclipse-temurin:17-jre
-# Set the working directory
 WORKDIR /app
-# Copy the JAR file from the builder stage
-COPY --from=builder /app/target/*.jar app.jar
-# Expose the port the app will run on
+
+COPY ./target/onlineshop-0.0.1-SNAPSHOT.jar app.jar
+
 EXPOSE 8080
-# Command to run the application
-ENTRYPOINT ["java", "-jar", "app.jar"]
+
+ENTRYPOINT [ "java", "-jar", "/app.jar" ]
