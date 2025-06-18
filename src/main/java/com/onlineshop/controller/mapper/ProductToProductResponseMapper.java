@@ -12,7 +12,7 @@ import org.springframework.core.convert.converter.Converter;
 @Mapper(componentModel = "spring")
 public interface ProductToProductResponseMapper extends Converter<Product, ProductResponse> {
 
-	String BASE_URL = "https://onlineshopbackend-f98u.onrender.com/products/images/";
+	String BASE_URL = "https://onlineshopbackend-f98u.onrender.com/images/";
 
 	@Mapping(source = "image", target = "image", qualifiedByName = "imageNameToImageUrl")
 	ProductResponse convert(@NonNull Product source);
