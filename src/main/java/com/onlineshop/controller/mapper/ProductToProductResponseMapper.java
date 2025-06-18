@@ -19,7 +19,7 @@ public interface ProductToProductResponseMapper extends Converter<Product, Produ
 
 	/**
 	 * Convierte el nombre de la imagen a una URL completa.
-	 * @param imageName Nombre de la imagen.
+	 * @param imageName Nombre de la imagen. h
 	 * @return URL completa de la imagen.
 	 */
 	@Named(value = "imageNameToImageUrl")
