@@ -38,7 +38,7 @@ spring:
     default-encoding: UTF-8
   web:
     resources:
-      static-locations: https://onlineshopbackend-f98u.onrender.com/images/
+      static-locations: https://onlineshopbackend-f98u.onrender.com/products/images/
   servlet:
     multipart:
       max-file-size: 10MB
@@ -46,9 +46,9 @@ spring:
 
 ritarouge:
   upload:
-    directory: https://onlineshopbackend-f98u.onrender.com/images/
-    baseUrl: https://onlineshopbackend-f98u.onrender.com/images/
-    localDirectory: https://onlineshopbackend-f98u.onrender.com/images/
+    directory: https://onlineshopbackend-f98u.onrender.com/products/images/
+    baseUrl: https://onlineshopbackend-f98u.onrender.com/products/images/
+    localDirectory: https://onlineshopbackend-f98u.onrender.com/products/images/
   mail:
     hostEmail: proyectoopositaweb@gmail.com
     host: http://localhost:4200
