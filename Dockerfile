@@ -4,7 +4,9 @@ FROM eclipse-temurin:17-jdk AS builder
 WORKDIR /app
 # Copy the application code
 COPY . .
-# Construir el archivo .jar usando Maven Wrapper
+# Asegurar permisos de ejecución para mvnw (usando ruta explícita)
+RUN chmod +x ./mvnw
+# Construir el archivo .jar usando Maven Wrapper (usando ruta explícita)
 RUN ./mvnw clean package -DskipTests
 
 # Stage 2: Run the application
